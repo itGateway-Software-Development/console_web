@@ -38,20 +38,26 @@ const login = async () => {
     formData.append('password_confirmation', form.value.password_confirmation);
     formData.append('remember', form.value.remember);
 
-    const token = encodeURIComponent('itGateway1234!@#$2024');
+    const api_token = encodeURIComponent('itGateway1234!@#$2024');
 
-    const res = await axios.post(`https://console.app.itgatewaycloud.com/api/v1/register?token=${token}`, formData);
+    const res = await axios.post(`https://console.app.itgatewaycloud.com/api/v1/register?token=${api_token}`, formData);
+
+    console.log(res.data.message == 'success', res.data.message);
 
     if(res.status === 404) {
       throw new Error("page not found");
     }
 
+    const {user, token} = res.data;
+
     if(res.data.message == 'success') {
-      useCookie('userData').value = user
-      useCookie('accessToken').value = token
+      // useCookie('userData').value = user
+      // useCookie('accessToken').value = token
+      localStorage.setItem('userData', JSON.stringify(user))
+      localStorage.setItem('token', JSON.stringify(token))
       
       await nextTick(() => {
-        router.replace(route.query.to ? String(route.query.to) : '/')
+        router.replace('/dashboard')
       })
     }
   }
