@@ -79,6 +79,11 @@ const router = createRouter({
     }
     else {
 
+      if(to.name == 'login' || to.name == 'register') {
+        next();
+        return
+      } 
+
       if (to.name !== 'login' && to.name !== 'forget-password' && to.name !== 'reset-password') {
 
         next({ name: 'login' })

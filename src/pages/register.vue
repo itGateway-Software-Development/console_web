@@ -40,7 +40,7 @@ const login = async () => {
 
     const token = encodeURIComponent('itGateway1234!@#$2024');
 
-    const res = await axios.post(`https://console.app.itgatewaycloud.com/api/v1/register?token=${token}`, formData);
+    const res = await axios.post(`http://localhost:8000/api/v1/register?token=${token}`, formData);
 
     if(res.status === 404) {
       throw new Error("page not found");
