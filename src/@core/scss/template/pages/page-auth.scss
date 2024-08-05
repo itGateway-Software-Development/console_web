@@ -1,0 +1,111 @@
+.layout-blank {
+  .auth-wrapper {
+    min-block-size: calc(var(--vh, 1vh) * 100);
+  }
+
+  .auth-card {
+    z-index: 1 !important;
+  }
+
+ 
+
+  @media (min-width: 1264px), (max-width: 959px) and (min-width: 450px) {
+    .v-otp-input .v-otp-input__content {
+      gap: 1.25rem;
+    }
+  }
+}
+
+.auth-btn{
+  border: 2px solid #e25a00 !important;
+  background: linear-gradient(99deg,#EC6316 3%,#c75b13 90%) !important;
+  color: #ededed;
+  border-radius: 0px 20px 0 20px;
+  font-size: 15px;
+  letter-spacing: 0.03rem;
+  transition: .5s ease;
+  font-weight: 550;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 5px 5px;
+  width: 100%;
+} 
+
+.auth-btn:hover {
+  border: 2px solid #EC6316 !important;
+  color: #ededed !important;
+  transform: translateY(-5px);
+}
+
+.auth-btn::after {
+  content: '';
+  position: absolute;
+  /* background: linear-gradient(to right,#EC6316, #853a0f); */
+  background: linear-gradient(99deg,#EC6316 3%,#ff6600 90%);
+  z-index: -1;
+  padding: 0.25em 0.5em;
+  display: block;
+  transition: all 0.5s;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+}
+
+.auth-btn:hover::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all .8s;
+  transform: skewX(-45deg) scale(2, 1);
+}
+
+@media (min-width: 960px) {
+  .skin--bordered {
+    .auth-card-v2 {
+      border-inline-start: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .auth-footer-mask {
+    inset-block-end: 10% !important;
+  }
+}
+
+.auth-logo {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 2.5rem;
+  inset-inline-start: 2.5rem;
+}
+
+.auth-wrapper .auth-illustration {
+  z-index: 1;
+  max-inline-size: 48rem;
+}
+
+.auth-wrapper .auth-footer-mask {
+  position: absolute;
+  inline-size: 100%;
+  inset-block-end: 5%;
+}
+
+// App logo and App title
+.app-logo {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+
+  .app-logo-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.27px;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+  }
+}
