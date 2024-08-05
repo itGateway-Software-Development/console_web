@@ -41,6 +41,10 @@ const userProfileList = [
     href: '#',
   },
 ]
+
+const router = useRouter()
+const route = useRoute()
+
 const logout = async () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
