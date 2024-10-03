@@ -80,7 +80,7 @@ const readonly_bg = computed(() => {
     const {readonly} = props;
 
     if(readonly) {
-      return "bg-slate-300 dark:bg-zinc-500"
+      return "bg-slate-300 dark:bg-gray-600"
     } else {
       return ""
     }

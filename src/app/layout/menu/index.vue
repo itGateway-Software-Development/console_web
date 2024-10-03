@@ -320,7 +320,7 @@ function handleDropdownMenu() {
           <img :src="logoSm" alt="" class="h-8 mx-auto" />
         </span>
         <span class="group-data-[sidebar-size=sm]:hidden">
-          <img :src="logoDark" alt="" class="h-12 mx-auto" />
+          <img :src="logoDark" alt="" class="h-24 mx-auto" />
         </span>
       </div>
       <div
@@ -331,7 +331,7 @@ function handleDropdownMenu() {
           <img :src="logoSm" alt="" class="h-8 mx-auto" />
         </span>
         <span class="group-data-[sidebar-size=sm]:hidden">
-          <img :src="logoLight" alt="" class="h-12 mx-auto" />
+          <img :src="logoLight" alt="" class="h-24 mx-auto" />
         </span>
       </div>
       <button type="button" class="hidden p-0 float-end" id="vertical-hover">

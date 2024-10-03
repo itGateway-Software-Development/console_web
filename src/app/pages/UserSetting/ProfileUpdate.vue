@@ -87,7 +87,7 @@ const updateProfile = async() => {
              <div class="flex flex-col gap-2">
                 <label for="" >Email <span class="text-red-700">*</span></label>
                 <div class="flex gap-2">
-                  <TInputField class="flex-grow " required type="email" v-model="form.email" readonly/>
+                  <TInputField class="flex-grow " type="email" v-model="form.email" readonly/>
                   <!-- <div>
                     <Button text="Change" type="button" />
                   </div> -->

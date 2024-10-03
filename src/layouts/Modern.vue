@@ -18,32 +18,7 @@ const getCurrentYear = computed(() => new Date().getFullYear());
         alt=""
       />
     </div>
-    <div
-      class="min-h-[calc(100vh_-_theme('spacing.4')_*_2)] mx-3 lg:w-[40rem] shrink-0 px-10 py-14 flex items-center justify-center m-4 bg-white rounded z-10 relative dark:bg-zink-700 dark:text-zink-100 md:mx-auto xl:mx-4"
-    >
-      <div class="flex flex-col w-full h-full">
-        <div>
-          <div class="relative dropdown text-end">
-            <LanguageDropdown show-name />
-          </div>
-        </div>
-        <div class="my-auto mx-auto">
-          <router-view />
-        </div>
-        <div class="mt-5">
-          <p class="mb-0 text-center text-15 text-slate-500 dark:text-zink-200">
-            © {{ getCurrentYear }} Tailwick. Crafted with
-            <i class="text-red-500 ri-heart-fill"></i> by
-            <a
-              href="http://themesdesign.in"
-              class="underline transition-all duration-200 ease-linear text-slate-800 dark:text-zink-50 hover:text-custom-500"
-            >
-              Themesdesign
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
+    
     <div
       class="relative z-10 flex items-center justify-center min-h-screen px-10 grow py-14"
     >
@@ -68,6 +43,33 @@ const getCurrentYear = computed(() => new Date().getFullYear());
             empower your business in shaping a distinctive and impactful brand.
             Elevate your business's image and leave a lasting impression with
             our comprehensive branding solutions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class=" flex items-center justify-center m-4 bg-white rounded z-10 relative dark:bg-zink-700 dark:text-zink-100 md:mx-auto xl:mx-4"
+    >
+      <div class="flex flex-col w-full ">
+        <div>
+          <div class="relative dropdown text-end">
+            <LanguageDropdown show-name />
+          </div>
+        </div>
+        <div class="my-auto mx-auto">
+          <router-view />
+        </div>
+        <div class="mt-5">
+          <p class="mb-0 text-center text-15 text-slate-500 dark:text-zink-200">
+            © {{ getCurrentYear }} Tailwick. Crafted with
+            <i class="text-red-500 ri-heart-fill"></i> by
+            <a
+              href="http://themesdesign.in"
+              class="underline transition-all duration-200 ease-linear text-slate-800 dark:text-zink-50 hover:text-custom-500"
+            >
+              Themesdesign
+            </a>
           </p>
         </div>
       </div>

@@ -7,16 +7,14 @@ const BoxedLayout = defineAsyncComponent(() => import("@/layouts/Boxed.vue"));
 const CoverLayout = defineAsyncComponent(() => import("@/layouts/Cover.vue"));
 const ModernLayout = defineAsyncComponent(() => import("@/layouts/Modern.vue"));
 
-const accountRoutes = [
+const accountRoutes = [  
   {
     path: "/login",
     name: "Login",
     component: () => import("@/views/authentication/Login.vue"),
-    props: () => ({ layout: LAYOUT_TYPES.BOXED }),
     meta: {
       title: "Sign In",
       authRequired: false,
-      layout: BoxedLayout
     }
   },
   {

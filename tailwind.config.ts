@@ -20,7 +20,8 @@ export default {
     "./mode_modules/vue3-popper/**/*",
     "./node_modules/datatables.net/**/*",
     "./node_modules/datatables.net-dt/**/*",
-    "./node_modules/datatables.net-responsive/**/*"
+    "./node_modules/datatables.net-responsive/**/*",
+     "./node_modules/flowbite/**/*.js"
   ],
   darkMode: ["class", '[data-mode="dark"]'],
   theme: {
@@ -312,6 +313,7 @@ export default {
     require("./plugins/vanilla-calendar.ts"),
     // //apps pages
     require("./plugins/apps.ts"),
-    require("./plugins/custom.ts")
+    require("./plugins/custom.ts"),
+    require('flowbite/plugin')
   ]
 };

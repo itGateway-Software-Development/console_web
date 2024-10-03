@@ -33,13 +33,11 @@ export default class AuthService {
 
     async login(payload:UserType) {
         try {
-            const { email, password, name, password_confirmation } = payload;
+            const { email, password } = payload;
 
             const formData = new FormData();
             formData.append("email", email!);
-            formData.append("name", name);
             formData.append("password", password);
-            formData.append("password_confirmation", password_confirmation);
       
             const response = await axios.post(api.login, formData);
       

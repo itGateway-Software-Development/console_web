@@ -39,6 +39,7 @@ import TCkEditor from "@/app/components/editors/CKEditor.vue";
 import TBallon from "@/app/components/editors/Ballon.vue";
 import TInline from "@/app/components/editors/Inline.vue";
 import Button from "@/components/default/Button.vue";
+import DefaultButton from "@/components/default/DefaultButton.vue";
 
 export const initGlobalComponents = (app: App) => {
   app.component("TList", TList);
@@ -80,4 +81,5 @@ export const initGlobalComponents = (app: App) => {
   app.component("TBallon", TBallon);
   app.component("TInline", TInline);
   app.component("Button", Button);
+  app.component("DefaultButton", DefaultButton);
 };
