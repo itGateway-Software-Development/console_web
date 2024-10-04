@@ -14,6 +14,10 @@ const props = defineProps({
     type: String,
     default: ""
   },
+  from: {
+    type: String,
+    default: ""
+  },
   type: {
     type: String,
     default: "text"
@@ -106,8 +110,8 @@ const readonly_bg = computed(() => {
       <input
         v-model="value"
         :type="type"
-        class="form-input focus:outline-none disabled:bg-slate-100 dark:disabled:bg-zink-600 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-        :class="`${inputClass} ${getBorderClass} ${readonly_bg}`"
+        class="form-input focus:outline-none disabled:bg-slate-100 dark:disabled:bg-zink-600 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100  placeholder:text-slate-400 dark:placeholder:text-slate-200"
+        :class="`${inputClass} ${from == 'auth' ? 'border-zink-500 focus:border-none focus:ring-zink-600 ' : getBorderClass} ${readonly_bg} ${from == 'auth' ? 'bg-transparent' : 'dark:bg-zink-700'}`"
         :placeholder="placeholder"
         :required="required"
         :readonly="readonly"

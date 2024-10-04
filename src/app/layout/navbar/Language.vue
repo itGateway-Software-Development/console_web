@@ -30,19 +30,16 @@ const setLanguage = (entry: { [key: string]: string }) => {
       <button
         v-if="showName"
         type="button"
-        class="inline-flex items-center gap-3 transition-all duration-200 ease-linear dropdown-toggle btn border-slate-200 group/items focus:border-slate-500 "
+        class="inline-flex items-center gap-3 transition-all duration-200 ease-linear dropdown-toggle btn  group/items "
       >
-        <img
-          :src="usFlag"
-          alt="language-flag"
-          id="header-lang-img"
-          class="object-cover h-5 rounded-full"
-        />
-        <h6
-          class="text-base font-medium transition-all duration-200 ease-linear text-slate-600 group-hover/items:text-slate-500  "
+        <div class="flex items-center">
+          <h6
+          class="text-base font-medium transition-all duration-200 ease-linear text-slate-600 group-hover/items:text-slate-100  "
         >
           {{ langTitle }}
         </h6>
+        <i class="ri-arrow-down-s-fill text-2xl text-white"></i>
+        </div>
       </button>
       <NavBtn class="dropdown" v-else>
         <img
@@ -60,7 +57,6 @@ const setLanguage = (entry: { [key: string]: string }) => {
         :title="data.title"
         @click.prevent="setLanguage(data)"
       >
-        <img :src="data.src" alt="" class="object-cover h-4 rounded-full" />
         <h6
           class="transition-all duration-200 ease-linear font-15medium text- text-slate-600 dark:text-zink-200 group-hover/items:text-custom-500"
         >

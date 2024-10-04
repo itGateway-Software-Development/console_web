@@ -5,6 +5,8 @@ import { askConfirmation, successProcess, toastError, toastSuccess } from "@/plu
 import { computed, ref } from "vue";
 import { authService } from "@/app/service/httpService/httpServiceProvider.ts";
 import { useRouter } from "vue-router";
+import LanguageDropdown from "@/app/layout/navbar/Language.vue";
+import Logo from "@/assets/images/logo.png";
 
 const authUser = authService.getUser();
 const router = useRouter();
@@ -163,129 +165,142 @@ let intervalId: number | undefined = undefined;
 
 </script>
 <template>
-  <div class="text-center">
-    <p class="mb-8 text-slate-500 dark:text-zink-200">Reset your password</p>
-  </div>
-
-  <div
-    v-if="!successMsg && !errorMsg && !isValidReset"
-    class="px-4 py-3 mb-6 text-sm text-yellow-500 border border-transparent rounded-md bg-yellow-50 dark:bg-yellow-400/20"
-  >
-    Provide your email address, and reset code will be sent to you 
-  </div>
-
-  <div
-    v-if="successMsg"
-    class="px-4 py-3 mb-6 text-sm text-green-500 border border-transparent rounded-md bg-green-50 dark:bg-green-400/20"
-  >
-    {{ successMsg }}
-  </div>
-
-  <div
-    v-if="errorMsg"
-    class="px-4 py-3 mb-6 text-sm text-red-500 border border-transparent rounded-md bg-red-50 dark:bg-red-400/20"
-  >
-    {{ errorMsg }}
-  </div>
-
-  <form autocomplete="off" v-if="!isValidReset" action="/" >
-    <TInputField hide-details placeholder="Email" v-model="email" :readonly="authUser.email ? true : false">
-      <template #suffix-outer>
-        <div
-          class="inline-block px-3 py-2 border border-l-1 border-slate-200 bg-slate-100 dark:border-zink-500 dark:bg-zink-600 ltr:rounded-r-md rtl:rounded-l-md cursor-pointer dark:hover:border-default-300"
-          @click="sendResetCode"
-          v-if="waitingTime == 60"
-        >
-          <span class="text-sm"> Get Code</span>
-        </div>
-
-        <div
-          class="inline-block px-4 py-[8px] border border-l-1 border-slate-200 bg-slate-100 dark:border-zink-500 dark:bg-zink-600 ltr:rounded-r-md rtl:rounded-l-md cursor-pointer dark:hover:border-default-300"
-          v-else
-        >
-          <span class="text-sm">{{waitingTime}} s</span>
-        </div>
-      </template>
-    </TInputField>
-
-    <TInputField placeholder="Reset Code" class="mt-5" v-model="resetCode" />
-
-    <div class="mt-8">
-      <Button
-        text="Next"
-        type="button"
-        @click="checkResetCode"
-      />
+  <section class="h-screen flex justify-center items-center auth-bg relative">
+    <div class="absolute top-5 right-14 hidden lg:block">
+      <LanguageDropdown show-name />
     </div>
-    <div class="mt-4 text-center">
-      <p class="mb-0">
-        Wait, I remember my password...
-        <router-link
-          to="/user-profile"
-          class="underline fw-medium text-custom-500"
+    <div class="w-[90%] sm:w-[450px] lg:w-[500px] auth-form-bg p-10 sm:py-0 px-10">
+      <div class="flex justify-center">
+        <img class="w-36" :src="Logo" alt="" />
+      </div>
+      <div>
+        <div class="text-center">
+          <p class="mb-8 text-slate-100">Reset your password</p>
+        </div>
+      
+        <div
+          v-if="!successMsg && !errorMsg && !isValidReset"
+          class="px-4 py-3 mb-6 text-sm text-yellow-500 border border-transparent rounded-md bg-yellow-50 dark:bg-yellow-400/20"
         >
-          Click here
-        </router-link>
-      </p>
-    </div>
-  </form>
-  
-  <form action="#" v-else>
-    <div class="mb-10">
-      <div class="relative">
-        <TInputField
-              placeholder="Enter new password"
-              v-model="form.new_password"
-              required
-              :type="showNewPw ? 'text' : 'password'"
-               @input="checkPassword"
-            >
-              <template #suffix>
-                <i
-                  class="align-middle ri-eye-fill text-slate-500 dark:text-zink-200 cursor-pointer"
-                  @mousedown="showNewPw = true" 
-                  @mouseup="showNewPw = false" 
-                  @mouseleave="showNewPw = false"
-                ></i>
-              </template>
-            </TInputField>
-            <span
-              v-if="password_error"
-              class="text-sm text-red-700"
-              >{{password_error}}</span
-            >
-       
+          Provide your email address, and reset code will be sent to you 
+        </div>
+      
+        <div
+          v-if="successMsg"
+          class="px-4 py-3 mb-6 text-sm text-green-500 border border-transparent rounded-md bg-green-50 dark:bg-green-400/20"
+        >
+          {{ successMsg }}
+        </div>
+      
+        <div
+          v-if="errorMsg"
+          class="px-4 py-3 mb-6 text-sm text-red-500 border border-transparent rounded-md bg-red-50 dark:bg-red-400/20"
+        >
+          {{ errorMsg }}
+        </div>
+      
+        <form autocomplete="off" v-if="!isValidReset" action="/" >
+          <TInputField hide-details placeholder="Email" v-model="email" from="auth" :readonly="authUser.email ? true : false">
+            <template #suffix-outer>
+              <div
+                class="inline-block px-3 py-2 border border-l-1 border-slate-200 bg-zink-500 bg-opacity-60 dark:border-zink-500 ltr:rounded-r-md rtl:rounded-l-md cursor-pointer dark:hover:border-default-300"
+                @click="sendResetCode"
+                v-if="waitingTime == 60"
+              >
+                <span class="text-sm text-white"> Get Code</span>
+              </div>
+      
+              <div
+                class="inline-block px-4 py-[8px] border border-l-1 border-slate-200 bg-slate-100 dark:border-zink-500 dark:bg-zink-600 ltr:rounded-r-md rtl:rounded-l-md cursor-pointer dark:hover:border-default-300"
+                v-else
+              >
+                <span class="text-sm">{{waitingTime}} s</span>
+              </div>
+            </template>
+          </TInputField>
+      
+          <TInputField placeholder="Enter Reset Code" from="auth" class="mt-5" v-model="resetCode" />
+      
+          <div class="mt-8">
+            <Button
+              text="Next"
+              type="button"
+              @click="checkResetCode"
+            />
+          </div>
+          <div class="my-6 text-center">
+            <p class="mb-0">
+              Wait, I remember my password...
+              <router-link
+                to="/user-profile"
+                class="underline fw-medium text-custom-500"
+              >
+                Click here
+              </router-link>
+            </p>
+          </div>
+        </form>
+        
+        <form action="#" v-else>
+          <div class="mb-10">
+            <div class="relative">
+              <TInputField
+                    placeholder="Enter new password"
+                    v-model="form.new_password"
+                    required
+                    :type="showNewPw ? 'text' : 'password'"
+                     @input="checkPassword"
+                  >
+                    <template #suffix>
+                      <i
+                        class="align-middle ri-eye-fill text-slate-500 dark:text-zink-200 cursor-pointer"
+                        @mousedown="showNewPw = true" 
+                        @mouseup="showNewPw = false" 
+                        @mouseleave="showNewPw = false"
+                      ></i>
+                    </template>
+                  </TInputField>
+                  <span
+                    v-if="password_error"
+                    class="text-sm text-red-700"
+                    >{{password_error}}</span
+                  >
+             
+            </div>
+          </div>
+          <div>
+            <div class="relative">
+              <TInputField
+                    placeholder="Confirm password"
+                    v-model="form.new_password_confirmation"
+                    required
+                    :type="showNewPwConfrim ? 'text' : 'password'"
+                  >
+                    <template #suffix>
+                      <i
+                        class="align-middle ri-eye-fill text-slate-500 dark:text-zink-200 cursor-pointer"
+                        @mousedown="showNewPwConfrim = true" 
+                        @mouseup="showNewPwConfrim = false" 
+                        @mouseleave="showNewPwConfrim = false"
+                      ></i>
+                    </template>
+                  </TInputField>
+                  <span
+                    v-if="
+                      form.new_password_confirmation &&
+                      form.new_password_confirmation != form.new_password
+                    "
+                    class="text-sm text-red-700"
+                    >Password Not Match</span
+                  >
+            </div>
+          </div>
+          <div class="mt-14">
+            <Button text="Save" type="button" @click="resetPassword" />
+          </div>
+        </form>
       </div>
     </div>
-    <div>
-      <div class="relative">
-        <TInputField
-              placeholder="Confirm password"
-              v-model="form.new_password_confirmation"
-              required
-              :type="showNewPwConfrim ? 'text' : 'password'"
-            >
-              <template #suffix>
-                <i
-                  class="align-middle ri-eye-fill text-slate-500 dark:text-zink-200 cursor-pointer"
-                  @mousedown="showNewPwConfrim = true" 
-                  @mouseup="showNewPwConfrim = false" 
-                  @mouseleave="showNewPwConfrim = false"
-                ></i>
-              </template>
-            </TInputField>
-            <span
-              v-if="
-                form.new_password_confirmation &&
-                form.new_password_confirmation != form.new_password
-              "
-              class="text-sm text-red-700"
-              >Password Not Match</span
-            >
-      </div>
-    </div>
-    <div class="mt-14">
-      <Button text="Save" type="button" @click="resetPassword" />
-    </div>
-  </form>
+    
+  </section>
 </template>

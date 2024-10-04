@@ -9,7 +9,7 @@ const props = defineProps({
     default: ""
   },
   items: {
-    type: Array as PropType<ListMenuItemType[] | string[]>,
+    type: Array as PropType<ListMenuItemType[] | string[] | any>,
     default: () => []
   },
   absolute: {
@@ -52,6 +52,10 @@ const onSelect = (item: any, close: any) => {
 };
 const list = ref<any>(null);
 
+const isLanguageDropdown = computed(() => {
+  return props.items[0] && props.items[0].title === "English";
+});
+
 const getListItemClass = computed(() => {
   switch (props.color) {
     case "custom":
@@ -83,10 +87,12 @@ const getListItemClass = computed(() => {
       <div class="bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md">
         <ul
           ref="list"
-          class="transition-[height] duration-200 bg-white z-50 py-2 dropdown-menu min-w-[10rem] ltr:text-left rtl:text-right rounded-md dropdown-menu flex flex-col dark:bg-zink-600"
+          class="transition-[height] duration-200 bg-white z-50 py-2 dropdown-menu min-w-[10rem] ltr:text-left rtl:text-right rounded-md dropdown-menu flex flex-col"
           :class="{
             shadow: shadow ? 'shadow-md' : '',
-            'ltr:right-0 rtl:-right-24': placement === 'bottom-end'
+            'ltr:right-0 rtl:-right-24': placement === 'bottom-end',
+            'dark:bg-zink-600': !isLanguageDropdown,
+            'dark:bg-slate-100': isLanguageDropdown,
           }"
         >
           <li
@@ -96,8 +102,12 @@ const getListItemClass = computed(() => {
             @click="onSelect(item, close)"
           >
             <div
-              class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear dropdown-item dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
-              :class="getListItemClass"
+              class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear dropdown-item dark:text-zink-100  dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
+              :class="{
+                getListItemClass,
+                'dark:hover:bg-zink-500' : !isLanguageDropdown,
+                'dark:hover:bg-slate-300' : isLanguageDropdown
+              }"
             >
               <slot :data="item" :index="index">
                 <div class="text-md">

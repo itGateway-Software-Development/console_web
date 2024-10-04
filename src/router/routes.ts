@@ -41,11 +41,9 @@ const accountRoutes = [
     path: "/reset-password",
     name: "ResetPassword",
     component: () => import("@/views/authentication/ResetPassword.vue"),
-    props: () => ({ layout: LAYOUT_TYPES.COVER }),
     meta: {
       title: "Reset Password",
       authRequired: false,
-      layout: CoverLayout
     }
   },
 ];

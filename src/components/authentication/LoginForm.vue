@@ -17,7 +17,7 @@ const form = ref({
   password: "",
 });
 
-const isSubmitted = ref(false);
+const isSubmitted = ref<Boolean>(false);
 const isSucceed = ref(false);
 const errorMsg = ref("");
 const loading = ref(false);
