@@ -30,7 +30,7 @@ const setLanguage = (entry: { [key: string]: string }) => {
       <button
         v-if="showName"
         type="button"
-        class="inline-flex items-center gap-3 transition-all duration-200 ease-linear dropdown-toggle btn border-slate-200 dark:border-zink-400/60 group/items focus:border-custom-500 dark:focus:border-custom-500"
+        class="inline-flex items-center gap-3 transition-all duration-200 ease-linear dropdown-toggle btn border-slate-200 group/items focus:border-slate-500 "
       >
         <img
           :src="usFlag"
@@ -39,7 +39,7 @@ const setLanguage = (entry: { [key: string]: string }) => {
           class="object-cover h-5 rounded-full"
         />
         <h6
-          class="text-base font-medium transition-all duration-200 ease-linear text-slate-600 group-hover/items:text-custom-500 dark:text-zink-200 dark:group-hover/items:text-custom-500"
+          class="text-base font-medium transition-all duration-200 ease-linear text-slate-600 group-hover/items:text-slate-500  "
         >
           {{ langTitle }}
         </h6>

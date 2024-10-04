@@ -21,11 +21,9 @@ const accountRoutes = [
     path: "/register",
     name: "Register",
     component: () => import("@/views/authentication/Register.vue"),
-    props: () => ({ layout: LAYOUT_TYPES.BOXED }),
     meta: {
       title: "Register",
       authRequired: false,
-      layout: BoxedLayout
     }
   },
   {

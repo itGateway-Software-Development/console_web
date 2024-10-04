@@ -6,6 +6,7 @@ import { LS_KEY_USER } from "@/app/const.ts";
 import LocalStorage from "@/app/service/localStorageService.ts";
 import Logo from "@/assets/images/logo.png";
 import { ArrowRight } from "lucide-vue-next";
+import LanguageDropdown from "@/app/layout/navbar/Language.vue";
 
 const userLocalStorage = new LocalStorage(LS_KEY_USER);
 
@@ -24,25 +25,13 @@ const isShowPassword = ref(false);
 const isEmailError = ref(false);
 const isPasswordError = ref(false);
 
-const checkValidation = computed(() => {
-  if (form.value.email && form.value.password) {
-    isEmailError.value = false;
-    isPasswordError.value = false;
-    return true;
+const isValidForm = computed(() => {
+  const { email, password } = form.value;
 
-  } else if(!form.value.email && form.value.password) {
-    isEmailError.value = true;
-    isPasswordError.value = false;
-    return false;
-  } else if(form.value.email && !form.value.password) {
-    isEmailError.value = false;
-    isPasswordError.value = true;
-    return false;
-  } else {
-    isEmailError.value = true;
-    isPasswordError.value = true;
-    return false;
-  }
+  isEmailError.value = !email;
+  isPasswordError.value = !password;
+
+  return email && password;
 });
 
 const resetForm = () => {
@@ -56,7 +45,7 @@ const resetForm = () => {
 const onSignIn = async () => {
   isSubmitted.value = true;
   errorMsg.value = "";
-  if (checkValidation.value) {
+  if (isValidForm.value) {
     loading.value = true;
 
     try {
@@ -97,7 +86,10 @@ const onSignIn = async () => {
 };
 </script>
 <template>
-  <section class="h-screen flex justify-center items-center auth-bg">
+  <section class="h-screen flex justify-center items-center auth-bg relative">
+    <div class="absolute top-5 right-14 hidden lg:block">
+      <LanguageDropdown show-name />
+    </div>
     <div class="w-full grid lg:grid-cols-5 items-center px-3 sm:px-20 md:px-40 lg:px-10 xl:px-40 2xl:px-64">
       <div class="hidden lg:block lg:col-span-3 pe-3 lg:pe-10 2xl:pe-20">
         <div class="flex flex-col gap-12 ">
