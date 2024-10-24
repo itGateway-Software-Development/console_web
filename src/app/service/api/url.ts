@@ -1,7 +1,7 @@
-// const url = "http://127.0.0.1:8000/api/v1/";
-const url = "https://console.app.itgatewaycloud.com/api/v1/";
+const {VITE_API_BASE_URL} = import.meta.env;
 const {VITE_API_ACCESS_TOKEN} = import.meta.env;
 
+const url = VITE_API_BASE_URL;
 const api_token = encodeURIComponent(VITE_API_ACCESS_TOKEN);
 
 let api = {
@@ -21,6 +21,16 @@ let api = {
     send_pw_reset_code: url + 'send-pw-reset-code?api_token=' + api_token,
     check_pw_reset_code: url + 'check-pw-reset-code?api_token=' + api_token,
     reset_pw: url + 'reset-pw?api_token=' + api_token,
+
+    // location api
+    locations: url + 'locations?api_token=' + api_token,
+    update_location(id:String|number) {
+        return url + 'location/' + id + '?api_token=' + api_token
+    }, 
+    delete_location(id: String|number) {
+        return url + 'locations/' + id + '?api_token=' + api_token
+    },
+    delete_multi_location: url + 'del/multi-locations?api_token=' + api_token,
 };
 
 export default api;

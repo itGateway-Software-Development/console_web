@@ -163,5 +163,8 @@
   "t-components": "Components",
   "t-video-player": "Video Player",
   "t-more": "More",
-  "t-servers": "Servers"
+  "t-servers": "Servers",
+  "t-admin": "Admin",
+  "t-server_managements": "Server Management",
+  "t-location": "Location"
 }

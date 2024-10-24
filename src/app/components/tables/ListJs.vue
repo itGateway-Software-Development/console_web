@@ -5,18 +5,10 @@ import { Search } from "lucide-vue-next";
 import List from "list.js";
 import Swal from "sweetalert2";
 import CreateUpdateDialog from "@/components/tables/listJs/CreateUpdateDialog.vue";
-import { useRouter } from "vue-router";
 
 const formData = ref<any>(null);
 
 const emit = defineEmits(["onSelectAll"]);
-
-const router = useRouter();
-
-const createNewServer = () => {
-  router.push("/servers/create");
-}
-
 
 const props = defineProps({
   id: {
@@ -323,12 +315,12 @@ const onAddUpdate = (data: any) => {
         </div>
       </div>
       <div class="flex gap-2 ltr:md:justify-end rtl:md:justify-start">
-        <TButton @click="createNewServer">
-          <i class="align-bottom ri-add-line me-1" /> Add New Server
+        <TButton @click="onAddNew">
+          <i class="align-bottom ri-add-line me-1" /> Add Customer
         </TButton>
-        <!-- <TButton color="red" icon @click="onDeleteMultipleRecords">
+        <TButton color="red" icon @click="onDeleteMultipleRecords">
           <i class="ri-delete-bin-2-line" />
-        </TButton> -->
+        </TButton>
       </div>
     </div>
     <table class="w-full" :class="tableClass">
@@ -371,14 +363,6 @@ const onAddUpdate = (data: any) => {
             <slot :name="header.value" :value="item">
               {{ item[header.value] }}
             </slot>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="5">
-            <h2 class="text-center mt-10">No Server Found</h2>
-            <div class="mt-10 w-36 mx-auto">
-              <Button @click="createNewServer" text="Add New Server" class="w-full"  />
-            </div>
           </td>
         </tr>
       </tbody>

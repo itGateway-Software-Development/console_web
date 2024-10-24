@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useDropzone } from "vue3-dropzone";
 import { UploadCloud } from "lucide-vue-next";
-import { watch, ref } from "vue";
+import { watch, ref, onMounted } from "vue";
 import { v4 as uuidv4 } from "uuid";
 
 const uploadedFiles = ref<any[]>([]);
@@ -13,8 +13,32 @@ const props = defineProps({
   dashed: {
     type: Boolean,
     default: false
+  },
+  error: {
+    type: Boolean,
+    default: false
+  },
+  image: {
+    type: String,
+    default: ''
   }
 });
+
+const emit = defineEmits(["uploadFiles"]);
+
+onMounted(() => {
+  if(props.image) {
+    uploadedFiles.value = [
+      {
+        src: props.image,
+        name: 'Existed image',
+        size: null,
+        raw: {},
+        id: uuidv4()
+      }
+    ];
+  }
+})
 
 const { getRootProps, getInputProps, open, acceptedFiles, fileRejections } =
   useDropzone({
@@ -43,6 +67,8 @@ watch(acceptedFiles, (files: any) => {
       }
     ];
   }
+
+  emit("uploadFiles", uploadedFiles.value);
 });
 
 const onDelete = (image: any) => {
@@ -51,17 +77,20 @@ const onDelete = (image: any) => {
   );
 
   fileRejections.value.push(image.raw);
+  emit("uploadFiles", uploadedFiles.value);
 };
+
+
 </script>
 <template>
   <div>
     <div
-      class="flex items-center justify-center border rounded-md cursor-pointer dropzone border-slate-200 dark:border-zink-500"
+      class="flex items-center justify-center border rounded-md cursor-pointer dropzone   "
       :class="`${
         dashed
           ? 'bg-white dark:bg-zink-700 border-dashed '
           : 'bg-slate-100 dark:bg-zink-600 '
-      }`"
+      } ${error ? 'border-red-500 dark:border-red-500' : 'border-slate-200 dark:border-zink-500'}`"
       @click="open"
     >
       <div class="fallback" v-bind="getRootProps()">
@@ -107,7 +136,7 @@ const onDelete = (image: any) => {
               <div class="grow">
                 <div class="pt-1">
                   <h5 class="mb-1 text-15">{{ image.name }}</h5>
-                  <p class="mb-0 text-slate-500 dark:text-zink-200">
+                  <p class="mb-0 text-slate-500 dark:text-zink-200" v-if="image.size">
                     {{ (Number(image.size) / 1024).toFixed(2) }} kb
                   </p>
                   <!-- <strong class="error text-danger" data-dz-errormessage></strong> -->

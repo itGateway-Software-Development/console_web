@@ -57,6 +57,10 @@ const props = defineProps({
   invalid: {
     type: Boolean,
     default: false
+  },
+  error: {
+    type: Boolean,
+    default: false
   }
 });
 const value = computed({
@@ -111,7 +115,7 @@ const readonly_bg = computed(() => {
         v-model="value"
         :type="type"
         class="form-input focus:outline-none disabled:bg-slate-100 dark:disabled:bg-zink-600 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100  placeholder:text-slate-400 dark:placeholder:text-slate-200"
-        :class="`${inputClass} ${from == 'auth' ? 'border-zink-500 focus:border-none focus:ring-zink-600 ' : getBorderClass} ${readonly_bg} ${from == 'auth' ? 'bg-transparent' : 'dark:bg-zink-700'}`"
+        :class="`${from == 'auth' ? 'border-zink-500 focus:border-none focus:ring-zink-600 ' : error ? 'border-red-500 focus:border-red-500' :getBorderClass} ${readonly_bg} ${from == 'auth' ? 'bg-transparent' : 'dark:bg-zink-700'} ${inputClass} `"
         :placeholder="placeholder"
         :required="required"
         :readonly="readonly"
