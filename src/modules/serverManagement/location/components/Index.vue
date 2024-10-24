@@ -264,6 +264,7 @@ const deleteRecord = (id: any) => {
       try {
         const res = await locationService.delete(authUser.token,id);
         if(res.data.status == 'success') {
+          toastSuccess(res.data.message)
           emit("onSubmitted", id);
           pageLoad.value = false
         }
