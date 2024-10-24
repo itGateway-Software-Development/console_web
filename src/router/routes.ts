@@ -19,7 +19,17 @@ const dashboardRoutes = [
       authRequired: true,
       layout: DefaultLayout
     }
-  },
+  }, 
+  {
+    path: "/servers",
+    name: "Server",
+    component: () => import("@/modules/servers/views/ServerCreatePage.vue"),
+    meta: {
+      title: "Dashboard",
+      authRequired: true,
+      layout: DefaultLayout
+    }
+  }
 ];
 
 

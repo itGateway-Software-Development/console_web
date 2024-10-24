@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-// import { tableData, headerItems } from "@/components/tables/listJs/utils";
+import { tableData } from "@/components/tables/listJs/utils";
 const headerItems: any[] = [
   { title: "Server", value: "customer_name" },
   { title: "Location", value: "email" },
@@ -9,26 +9,24 @@ const headerItems: any[] = [
   { title: "Operation", value: "action" }
 ];
 
-const finalData: any = [];
-
 
 const isAllSelect = ref(false);
-// const mapData = tableData.map((item) => {
-//   return {
-//     ...item,
-//     checked: false
-//   };
-// });
-// const finalData = ref(mapData);
-// const onSelectAll = () => {
-//   isAllSelect.value = !isAllSelect.value;
-//   finalData.value = finalData.value.map((item) => {
-//     return {
-//       ...item,
-//       checked: isAllSelect.value
-//     };
-//   });
-// };
+const mapData = tableData.map((item) => {
+  return {
+    ...item,
+    checked: false
+  };
+});
+const finalData = ref(mapData);
+const onSelectAll = () => {
+  isAllSelect.value = !isAllSelect.value;
+  finalData.value = finalData.value.map((item) => {
+    return {
+      ...item,
+      checked: isAllSelect.value
+    };
+  });
+};
 </script>
 <template>
   <TCard class="overflow-x-auto">

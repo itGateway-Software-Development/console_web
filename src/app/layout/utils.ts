@@ -41,12 +41,12 @@ export const menuItems: MenuItemType[] = [
     ]
   },
 
-  // { isHeader: true, title: "products" },
-  // {
-  //   icon: Server,
-  //   title: "servers",
-  //   path: '/servers'
-  // },
+  { isHeader: true, title: "products" },
+  {
+    icon: Server,
+    title: "servers",
+    path: '/servers'
+  },
 
  
   // {
