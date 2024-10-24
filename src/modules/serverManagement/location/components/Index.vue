@@ -372,12 +372,12 @@ const onSubmittedForm = async(data:any) => {
       
     </table>
     <div class="no-result" v-if="tableData.length == 0">
-      <div class="text-center p-7">
-        <h5 class="mb-2">Sorry! No Result Found</h5>
-        <p class="mb-0 text-slate-500 dark:text-zink-200">
-          We've searched more than 150+ data We did not find any data for
-          you search.
-        </p>
+      <div class="text-center p-7 flex flex-col justify-center items-center gap-5">
+        <img class="w-60" src="@/assets/images/start.png" alt="">
+        <h5 class="mb-2">You have no data. <span class="text-custom-500 font-bold">Add Now !</span></h5>
+        <div>
+          <Button text="Add Now" class="w-[200px]" @click="onAddNew" />
+        </div>
       </div>
     </div>
     <div class="no-result" style="display: none">

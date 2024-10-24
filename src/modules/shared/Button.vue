@@ -1,11 +1,12 @@
 <script setup>
     const props = defineProps({
-        text: String
+        text: String,
+        class: String
     })
 </script>
 
 <template>
-    <button class="default-btn">
+    <button :class="`default-btn w-full ${props.class} `">
         {{props.text}}
     </button>
 </template>
@@ -24,7 +25,6 @@
     z-index: 1;
     overflow: hidden;
     padding: 5px 5px;
-    width: 100%;
   } 
   
   .default-btn:hover {
