@@ -64,6 +64,7 @@ const uploadForm = async () => {
       emit('onSubmitted', {...preparedData.value});
   }
 };
+
 </script>
 <template>
   <TModal v-model="createEditModal">
