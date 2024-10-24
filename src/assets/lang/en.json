@@ -166,5 +166,6 @@
   "t-servers": "Servers",
   "t-admin": "Admin",
   "t-server_managements": "Server Management",
-  "t-location": "Location"
+  "t-location": "Location",
+  "t-server-types": "Server Types"
 }

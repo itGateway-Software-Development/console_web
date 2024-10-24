@@ -37,6 +37,7 @@ export const menuItems: MenuItemType[] = [
     icon: ServerCog,
     subMenu: [
       { path: "/server-management/location", title: "location" },
+      { path: "/server-management/server-types", title: "server-types" },
     ]
   },
 

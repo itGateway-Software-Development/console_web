@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { TableHeaderType } from "@/app/components/tables/types";
-import { onMounted, type PropType, onBeforeUnmount, ref, watch } from "vue";
+import { onMounted, type PropType, onBeforeUnmount, ref } from "vue";
 import { Search } from "lucide-vue-next";
 import List from "list.js";
 import Swal from "sweetalert2";
-import FormDialog from "./FormDialog.vue";
-import { locationService, authService } from "@/app/service/httpService/httpServiceProvider";
+import FormDialog from "@/modules/serverManagement/serverTypes/components/FormDialog.vue";
+import { serverTypeService, authService } from "@/app/service/httpService/httpServiceProvider";
 import { askConfirmation, toastError, toastSuccess } from "@/plugins/sweetAlert";
 import Loading from "@/modules/shared/Loading.vue";
-import { LocationPayload } from "../types/LocationType";
+import { ServerTypePayload } from "../types/ServerTypesType";
 
 const formData = ref<any>(null);
 const isEdit = ref<boolean>(false);
@@ -218,7 +218,7 @@ const onDeleteMultipleRecords = () => {
       if(result.isConfirmed) {
         pageLoad.value = true
         try {
-          const res = await locationService.deleteMulti(authUser.token, {ids: checkedIds});
+          const res = await serverTypeService.deleteMulti(authUser.token, {ids: checkedIds});
           if(res.data.status == 'success') {
             pageLoad.value = false
             toastSuccess(res.data.message)
@@ -251,7 +251,6 @@ const onDeleteMultipleRecords = () => {
 const onAddNew = () => {
   formData.value = {
     name: "",
-    image: "",
     status: 1,
   };
   createEditModal.value = true;
@@ -262,7 +261,7 @@ const deleteRecord = (id: any) => {
     if(result.isConfirmed) {
       pageLoad.value = true
       try {
-        const res = await locationService.delete(authUser.token,id);
+        const res = await serverTypeService.delete(authUser.token,id);
         if(res.data.status == 'success') {
           toastSuccess(res.data.message)
           emit("onSubmitted", id);
@@ -281,12 +280,11 @@ const deleteRecord = (id: any) => {
 const onSubmittedForm = async(data:any) => {
    try {
     pageLoad.value = true
-    const payload: LocationPayload = {
+    const payload: ServerTypePayload = {
         name: data.name,
-        image: data.image,
         status: data.status
       }
-      const res = isEdit.value ? await locationService.update(authUser.token, data.id, payload) : await locationService.store(authUser.token, payload);
+      const res = isEdit.value ? await serverTypeService.update(authUser.token, data.id, payload) : await serverTypeService.store(authUser.token, payload);
       if(res.data.status == 'success') {
         isEdit.value = false
         createEditModal.value = false
@@ -320,7 +318,7 @@ const onSubmittedForm = async(data:any) => {
       </div>
       <div class="flex gap-2 ltr:md:justify-end rtl:md:justify-start">
         <TButton @click="onAddNew">
-          <i class="align-bottom ri-add-line me-1" /> Add Location
+          <i class="align-bottom ri-add-line me-1" /> Add Server Type
         </TButton>
         <TButton color="red" icon @click="onDeleteMultipleRecords">
           <i class="ri-delete-bin-2-line" />
@@ -377,7 +375,7 @@ const onSubmittedForm = async(data:any) => {
         <img class="w-60" src="@/assets/images/start.png" alt="">
         <h5 class="mb-2">You have no data. <span class="text-custom-500 font-bold">Add Now !</span></h5>
         <div class="w-[200px]">
-          <Button text="Add New Location"  @click="onAddNew" />
+          <Button text="Add New Server Type"  @click="onAddNew" />
         </div>
       </div>
     </div>

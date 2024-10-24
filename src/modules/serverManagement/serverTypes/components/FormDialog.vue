@@ -25,16 +25,11 @@ const preparedData:any = ref(props.formData);
 
 const rules = {
   name: { required }, 
-  image: { required },
   status: { required }, 
 };
 
 //define validation
 const v$ = useVuelidate(rules, preparedData.value);
-
-const onFileUploaded = (file: any) => {
-  preparedData.value.image = file[0]?.raw;
-};
 
 const errorMsg = ref("");
 const createEditModal = computed({
@@ -69,7 +64,7 @@ const uploadForm = async () => {
         class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500"
       >
         <h5 class="text-16" id="exampleModalLabel">
-          {{ isEdit ? "Update Location" : "Add Location" }}
+          {{ isEdit ? "Update Server Type" : "Add Server Type" }}
         </h5>
         <TButton
           icon
@@ -85,15 +80,12 @@ const uploadForm = async () => {
         <div class="text-sm text-red-500 mb-3">{{ errorMsg }}</div>
         <TInputField
           v-model="preparedData.name"
-          label="Location name"
-          placeholder="Enter location"
+          label="Server Type Name"
+          placeholder="Enter server type"
           required
           class="mb-5 "
           :error="v$.name.$error"
         />
-        <TCard title="Location Image">
-          <TFileUploader :error="v$.image.$error" :image="preparedData.image" @uploadFiles="onFileUploaded" dashed />
-        </TCard>
      
         <div class="mb-2">
           <label class="mb-2 text-base font-medium">Status</label>
@@ -108,7 +100,7 @@ const uploadForm = async () => {
             Close
           </TButton>
           <TButton color="green" @click="uploadForm">
-            {{ isEdit ? "Update" : "Add Location" }}
+            {{ isEdit ? "Update" : "Add Server Type" }}
           </TButton>
         </div>
       </div>

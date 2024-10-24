@@ -31,6 +31,16 @@ let api = {
         return url + 'locations/' + id + '?api_token=' + api_token
     },
     delete_multi_location: url + 'del/multi-locations?api_token=' + api_token,
+
+    // server types api
+    server_types: url + 'server-types?api_token=' + api_token,
+    update_server_types(id:String|number) {
+        return url + 'server-type/' + id + '?api_token=' + api_token
+    }, 
+    delete_server_types(id: String|number) {
+        return url + 'server-types/' + id + '?api_token=' + api_token
+    },
+    delete_multi_server_types: url + 'del/multi-server-types?api_token=' + api_token,
 };
 
 export default api;
