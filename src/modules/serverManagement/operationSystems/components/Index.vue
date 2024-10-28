@@ -4,11 +4,11 @@ import { onMounted, type PropType, onBeforeUnmount, ref } from "vue";
 import { Search } from "lucide-vue-next";
 import List from "list.js";
 import Swal from "sweetalert2";
-import FormDialog from "@/modules/serverManagement/serverTypes/components/FormDialog.vue";
-import { serverTypeService, authService } from "@/app/service/httpService/httpServiceProvider";
+import FormDialog from "@/modules/serverManagement/operationSystems/components/FormDialog.vue"; 
+import { operationSystemService, authService } from "@/app/service/httpService/httpServiceProvider";
 import { askConfirmation, toastError, toastSuccess } from "@/plugins/sweetAlert";
 import Loading from "@/modules/shared/Loading.vue";
-import { ServerTypePayload } from "../types/ServerTypesType";
+import { OperationSystemPayload } from "../types/OperationSystemType";
 
 const formData = ref<any>(null);
 const isEdit = ref<boolean>(false);
@@ -25,6 +25,10 @@ const props = defineProps({
     default: () => []
   },
   items: {
+    type: Array as PropType<any[]>,
+    default: () => []
+  },
+  serverTypes: {
     type: Array as PropType<any[]>,
     default: () => []
   },
@@ -196,6 +200,8 @@ const refreshCallbacks = () => {
     element.addEventListener("click", () => {
       const id = element.parentElement?.closest("tr")?.children[0].innerHTML;
       const data = tableData.value.find((item) => item.id == id);
+      data.server_types = data.server_types.map((item: any) => item.value);
+      data.versions = data.versions.map((item: any) => item.version_no);
       formData.value = { ...data };
       isEdit.value = true;
       createEditModal.value = true;
@@ -218,7 +224,7 @@ const onDeleteMultipleRecords = () => {
       if(result.isConfirmed) {
         pageLoad.value = true
         try {
-          const res = await serverTypeService.deleteMulti(authUser.token, {ids: checkedIds});
+          const res = await operationSystemService.deleteMulti(authUser.token, {ids: checkedIds});
           if(res.data.status == 'success') {
             pageLoad.value = false
             toastSuccess(res.data.message)
@@ -251,6 +257,9 @@ const onDeleteMultipleRecords = () => {
 const onAddNew = () => {
   formData.value = {
     name: "",
+    server_types: [],
+    image: "",
+    versions: [],
     status: 1,
   };
   createEditModal.value = true;
@@ -261,7 +270,7 @@ const deleteRecord = (id: any) => {
     if(result.isConfirmed) {
       pageLoad.value = true
       try {
-        const res = await serverTypeService.delete(authUser.token,id);
+        const res = await operationSystemService.delete(authUser.token,id);
         if(res.data.status == 'success') {
           toastSuccess(res.data.message)
           emit("onSubmitted", id);
@@ -280,17 +289,22 @@ const deleteRecord = (id: any) => {
 const onSubmittedForm = async(data:any) => {
    try {
     pageLoad.value = true
-    const payload: ServerTypePayload = {
+
+    const payload: OperationSystemPayload = {
         name: data.name,
+        server_types: data.server_types,
+        image: data.image,
+        versions: data.versions,
         status: data.status
       }
-      const res = isEdit.value ? await serverTypeService.update(authUser.token, data.id, payload) : await serverTypeService.store(authUser.token, payload);
+
+      const res = isEdit.value ? await operationSystemService.update(authUser.token, data.id, payload) : await operationSystemService.store(authUser.token, payload);
       if(res.data.status == 'success') {
         isEdit.value = false
         createEditModal.value = false
         toastSuccess(res.data.message)
         emit('onSubmitted', true)
-      }else {
+      } else {
         pageLoad.value = false
         toastError("Something Wrong !")
       }
@@ -321,7 +335,7 @@ const onSubmittedForm = async(data:any) => {
       </div>
       <div class="flex gap-2 ltr:md:justify-end rtl:md:justify-start">
         <TButton @click="onAddNew">
-          <i class="align-bottom ri-add-line me-1" /> Add Server Type
+          <i class="align-bottom ri-add-line me-1" /> Add Operation System
         </TButton>
         <TButton color="red" icon @click="onDeleteMultipleRecords">
           <i class="ri-delete-bin-2-line" />
@@ -378,7 +392,7 @@ const onSubmittedForm = async(data:any) => {
         <img class="w-60" src="@/assets/images/start.png" alt="">
         <h5 class="mb-2">You have no data. <span class="text-custom-500 font-bold">Add Now !</span></h5>
         <div class="w-[200px]">
-          <Button text="Add New Server Type"  @click="onAddNew" />
+          <Button text="Add New OS"  @click="onAddNew" />
         </div>
       </div>
     </div>
@@ -415,6 +429,7 @@ const onSubmittedForm = async(data:any) => {
     v-if="createEditModal"
     v-model="createEditModal"
     :formData="formData"
+    :serverTypes="props.serverTypes"
     :isEdit="isEdit"
     @onSubmitted="onSubmittedForm"
   />

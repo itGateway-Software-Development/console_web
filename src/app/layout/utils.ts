@@ -38,6 +38,7 @@ export const menuItems: MenuItemType[] = [
     subMenu: [
       { path: "/server-management/location", title: "location" },
       { path: "/server-management/server-types", title: "server-types" },
+      { path: "/server-management/operation-systems", title: "operation-system" },
     ]
   },
 

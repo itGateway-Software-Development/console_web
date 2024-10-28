@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "@/router/routes.ts";
 import LocalStorage from "@/app/service/localStorageService.ts";
 import { LS_KEY_USER } from "@/app/const.ts";
+import { authService } from "@/app/service/httpService/httpServiceProvider";
 
 const router = createRouter({
   history: createWebHistory(),

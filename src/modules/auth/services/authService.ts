@@ -52,6 +52,19 @@ export default class AuthService {
         }
     }
 
+    async isStillAuthenticated(payload: {token: String, email: String}) {
+        try {
+            const response = await axios.post(api.is_still_authenticated, payload, api.headers(payload.token));
+            return response;
+        } catch (error: any) {
+            if(error.status == 422) {
+                return error.response;
+            } else {
+                return error.response;
+            }
+        }
+    }
+
     getUser() {
         return userLocalStorage.getItems();
       }

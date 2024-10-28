@@ -21,6 +21,7 @@ let api = {
     send_pw_reset_code: url + 'send-pw-reset-code?api_token=' + api_token,
     check_pw_reset_code: url + 'check-pw-reset-code?api_token=' + api_token,
     reset_pw: url + 'reset-pw?api_token=' + api_token,
+    is_still_authenticated: url + 'check-auth?api_token=' + api_token,
 
     // location api
     locations: url + 'locations?api_token=' + api_token,
@@ -41,6 +42,16 @@ let api = {
         return url + 'server-types/' + id + '?api_token=' + api_token
     },
     delete_multi_server_types: url + 'del/multi-server-types?api_token=' + api_token,
+
+    // operation system api
+    operation_systems: url + 'operation-systems?api_token=' + api_token,
+    update_operation_systems(id:String|number) {
+        return url + 'operation-system/' + id + '?api_token=' + api_token
+    }, 
+    delete_operation_systems(id: String|number) {
+        return url + 'operation-systems/' + id + '?api_token=' + api_token
+    },
+    delete_multi_operation_systems: url + 'del/multi-operation-systems?api_token=' + api_token
 };
 
 export default api;

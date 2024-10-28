@@ -6,6 +6,7 @@ import { userProfileRoutes } from "@/modules/userProfile/router/userProfileRoute
 import { serverRoutes } from "@/modules/servers/router/serverRoutes";
 import { locationRoutes } from "@/modules/serverManagement/location/router/locationRoutes";
 import { serverTypeRoutes } from "@/modules/serverManagement/serverTypes/router/serverTypeRoutes";
+import { operationSystemRoutes } from "@/modules/serverManagement/operationSystems/router/operationSystemRoutes";
 
 const CoverLayout = defineAsyncComponent(() => import("@/layouts/Cover.vue"));
 
@@ -65,5 +66,6 @@ export const routes = [
   ...userProfileRoutes,
   ...serverRoutes,
   ...locationRoutes,
-  ...serverTypeRoutes
+  ...serverTypeRoutes,
+  ...operationSystemRoutes
 ];

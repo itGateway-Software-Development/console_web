@@ -107,7 +107,7 @@ const uploadForm = async () => {
           <TButton color="slate" @click="createEditModal = false">
             Close
           </TButton>
-          <TButton color="green" @click="uploadForm">
+          <TButton color="orange" @click="uploadForm">
             {{ isEdit ? "Update" : "Add Location" }}
           </TButton>
         </div>

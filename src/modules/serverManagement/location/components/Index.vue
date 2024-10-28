@@ -292,6 +292,9 @@ const onSubmittedForm = async(data:any) => {
         createEditModal.value = false
         toastSuccess(res.data.message)
         emit('onSubmitted', true)
+      }else {
+        pageLoad.value = false
+        toastError("Something Wrong !")
       }
     } catch (error) {
       pageLoad.value = false
