@@ -1,8 +1,8 @@
 import api from "@/app/service/api/url";
 import axios from "axios";
-import { ServerTypePayload } from "../types/ServerTypesType";
+import { ServerPayload } from "../types/ServersType";
 
-export default class ServerTypeService {
+export default class ServerService {
     async getServerTypes(token: String) {
         try {
             const response = await axios.get(api.server_types, api.headers(token));
@@ -14,13 +14,13 @@ export default class ServerTypeService {
         }
     }
     
-    async store(token: String, payload:ServerTypePayload) {
+    async store(token: String, payload:ServerPayload) {
         const response = await axios.post(api.server_types, payload, api.headers(token));
 
         return response;
     }
 
-    async update(token: String, id: String|number, payload:ServerTypePayload) {
+    async update(token: String, id: String|number, payload:ServerPayload) {
         const response = await axios.post(api.update_server_types(id), payload, api.headers(token));
 
         return response;

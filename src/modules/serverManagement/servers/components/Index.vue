@@ -4,11 +4,11 @@ import { onMounted, type PropType, onBeforeUnmount, ref } from "vue";
 import { Search } from "lucide-vue-next";
 import List from "list.js";
 import Swal from "sweetalert2";
-import FormDialog from "@/modules/serverManagement/serverTypes/components/FormDialog.vue";
+import FormDialog from "@/modules/serverManagement/servers/components/FormDialog.vue";
 import { serverTypeService, authService } from "@/app/service/httpService/httpServiceProvider";
 import { askConfirmation, toastError, toastSuccess } from "@/plugins/sweetAlert";
 import Loading from "@/modules/shared/Loading.vue";
-import { ServerTypePayload } from "../types/ServerTypesType";
+import { ServerPayload } from "../types/ServersType";
 
 const formData = ref<any>(null);
 const isEdit = ref<boolean>(false);
@@ -280,7 +280,7 @@ const deleteRecord = (id: any) => {
 const onSubmittedForm = async(data:any) => {
    try {
     pageLoad.value = true
-    const payload: ServerTypePayload = {
+    const payload: ServerPayload = {
         name: data.name,
         status: data.status
       }
@@ -321,7 +321,7 @@ const onSubmittedForm = async(data:any) => {
       </div>
       <div class="flex gap-2 ltr:md:justify-end rtl:md:justify-start">
         <TButton @click="onAddNew">
-          <i class="align-bottom ri-add-line me-1" /> Add Server Type
+          <i class="align-bottom ri-add-line me-1" /> Add Server
         </TButton>
         <TButton color="red" icon @click="onDeleteMultipleRecords">
           <i class="ri-delete-bin-2-line" />
@@ -378,7 +378,7 @@ const onSubmittedForm = async(data:any) => {
         <img class="w-60" src="@/assets/images/start.png" alt="">
         <h5 class="mb-2">You have no data. <span class="text-custom-500 font-bold">Add Now !</span></h5>
         <div class="w-[200px]">
-          <Button text="Add New Server Type"  @click="onAddNew" />
+          <Button text="Add New Server"  @click="onAddNew" />
         </div>
       </div>
     </div>

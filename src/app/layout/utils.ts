@@ -39,6 +39,7 @@ export const menuItems: MenuItemType[] = [
       { path: "/server-management/location", title: "location" },
       { path: "/server-management/server-types", title: "server-types" },
       { path: "/server-management/operation-systems", title: "operation-system" },
+      // { path: "/server-management/servers", title: "servers" },
     ]
   },
 

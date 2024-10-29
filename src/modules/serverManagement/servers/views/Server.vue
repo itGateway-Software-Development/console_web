@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
-import Index from "@/modules/serverManagement/serverTypes/components/Index.vue";
+import Index from "@/modules/serverManagement/servers/components/Index.vue";
 import {
   serverTypeService,
   authService,
 } from "@/app/service/httpService/httpServiceProvider";
-import { ServerTypeData } from "../types/ServerTypesType";
+import { ServerData } from "../types/ServersType";
 import TableLoading from "@/modules/shared/TableLoading.vue";
 import { headerItems } from "../utils";
 
 const loading = ref(true);
-const serverTypes = ref<ServerTypeData[]>([]);
-const getServerTypes = async () => {
+const serverTypes = ref<ServerData[]>([]);
+const getServers = async () => {
   const authUser = authService.getUser();
   const res = await serverTypeService.getServerTypes(authUser.token);
   serverTypes.value = res.data.serverTypes;
@@ -32,15 +32,15 @@ const onSelectAll = () => {
 
 const handleSubmitSuccess = async () => {
   loading.value = true;
-  await getServerTypes(); 
+  await getServers(); 
 };
 
 onMounted( () => {
-     getServerTypes();
+     getServers();
 });
 </script>
 <template>
-  <PageHeader title="Server Types" :items="['Server Management', 'Server Types']" />
+  <PageHeader title="Servers" :items="['Server Management', 'Servers']" />
   <TCard class="overflow-x-auto" v-if="!loading">
     <Index
       id="location-table"

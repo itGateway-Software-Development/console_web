@@ -8,7 +8,7 @@ defineProps({
   },
   duration: {
     type: Number,
-    default: 100000
+    default: 1500
     // default: 600000
   },
   suffix: {
@@ -27,8 +27,8 @@ defineProps({
 </script>
 <template>
   <CountTo
-    :start-val="endVal"
-    :endVal="0"
+    :start-val="0"
+    :endVal="endVal"
     :duration="duration"
     :suffix="suffix"
     :prefix="prefix"

@@ -58,13 +58,13 @@ const uploadForm = async () => {
 
 </script>
 <template>
-  <TModal v-model="createEditModal">
+  <TModal v-model="createEditModal" size="x-large">
     <template #content>
       <div
         class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500"
       >
         <h5 class="text-16" id="exampleModalLabel">
-          {{ isEdit ? "Update Server Type" : "Add Server Type" }}
+          {{ isEdit ? "Update Server" : "Add Server" }}
         </h5>
         <TButton
           icon
@@ -100,7 +100,7 @@ const uploadForm = async () => {
             Close
           </TButton>
           <TButton color="orange" @click="uploadForm">
-            {{ isEdit ? "Update" : "Add Server Type" }}
+            {{ isEdit ? "Update" : "Add Server" }}
           </TButton>
         </div>
       </div>

@@ -1,12 +1,12 @@
 
-  export type ServerTypeData = {
+  export type ServerData = {
     id: string|number;
     name: string;
     status: number;
     checked?: boolean
   }
 
-  export type ServerTypePayload = {
+  export type ServerPayload = {
     name: string;
     status: number|string
   }

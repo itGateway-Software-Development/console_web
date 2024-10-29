@@ -3,10 +3,11 @@ import { defineAsyncComponent } from "vue";
 
 import { authRoutes } from "@/modules/auth/router/authRoutes";
 import { userProfileRoutes } from "@/modules/userProfile/router/userProfileRoutes";
-import { serverRoutes } from "@/modules/servers/router/serverRoutes";
+import { serverRoutes as InstantRoutes } from "@/modules/servers/router/serverRoutes";
 import { locationRoutes } from "@/modules/serverManagement/location/router/locationRoutes";
 import { serverTypeRoutes } from "@/modules/serverManagement/serverTypes/router/serverTypeRoutes";
 import { operationSystemRoutes } from "@/modules/serverManagement/operationSystems/router/operationSystemRoutes";
+import { serverRoutes } from "@/modules/serverManagement/servers/router/serverRoutes";
 
 const CoverLayout = defineAsyncComponent(() => import("@/layouts/Cover.vue"));
 
@@ -64,8 +65,9 @@ export const routes = [
   ...pagesRoutes,
   ...authRoutes,
   ...userProfileRoutes,
-  ...serverRoutes,
+  ...InstantRoutes,
   ...locationRoutes,
   ...serverTypeRoutes,
-  ...operationSystemRoutes
+  ...operationSystemRoutes,
+  ...serverRoutes,
 ];

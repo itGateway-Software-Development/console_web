@@ -5,6 +5,7 @@ export default {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
     "./src/**/*.html",
+    "./src/modules/*/*/*.vue",
     "./src/**/*.vue",
     "./src/**/*.js",
     "./node_modules/@fullcalendar/**/*",
