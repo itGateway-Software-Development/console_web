@@ -22,6 +22,7 @@ let api = {
     check_pw_reset_code: url + 'check-pw-reset-code?api_token=' + api_token,
     reset_pw: url + 'reset-pw?api_token=' + api_token,
     is_still_authenticated: url + 'check-auth?api_token=' + api_token,
+    deploy: url+ "run-script",
 
     // location api
     locations: url + 'locations?api_token=' + api_token,

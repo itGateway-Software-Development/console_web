@@ -8,6 +8,8 @@
     import Centos from '@/assets/images/servers/centos.png'
     import Debian from '@/assets/images/servers/debian.png'
     import { ref } from 'vue';
+import axios from 'axios'
+import api from '@/app/service/api/url'
 
     const locations = ref( [
         {
@@ -214,6 +216,11 @@
         })
     }
 
+    const deploy = async() => {
+        const response = await axios.get(api.deploy);
+        console.log(response);
+    }
+
 </script>
 <template>
     <section class="mt-5">
@@ -347,7 +354,7 @@
                             </div>
                         </div>
                         <div class="w-1/2 mx-auto mt-5 pb-7">
-                            <Button text="Deploy" />
+                            <Button text="Deploy" @click="deploy" />
                         </div>
                     </div>
                 </div>
