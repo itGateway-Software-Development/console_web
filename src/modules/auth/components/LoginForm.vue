@@ -4,7 +4,7 @@ import { authService } from "@/app/service/httpService/httpServiceProvider.ts";
 import { useRouter } from "vue-router";
 import { LS_KEY_USER } from "@/app/const.ts";
 import LocalStorage from "@/app/service/localStorageService.ts";
-import Logo from "@/assets/images/logo.png";
+import Logo from "@/assets/images/light-logo.png";
 import { ArrowRight } from "lucide-vue-next";
 import LanguageDropdown from "@/app/layout/navbar/Language.vue";
 
