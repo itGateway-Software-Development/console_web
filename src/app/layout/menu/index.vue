@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, onMounted, watch, onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { logoDark, logoLight, logoSm } from "@/assets/images/utils";
+import { logoDark, logoLight, logoSmDark, logoSmLight } from "@/assets/images/utils";
 import { menuItems } from "@/app/layout/utils";
 import SubMenu from "@/app/layout/menu/SubMenu.vue";
 import { useLayoutStore } from "@/store/layout";
@@ -317,10 +317,10 @@ function handleDropdownMenu() {
         class="group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden group-data-[sidebar=modern]:hidden cursor-pointer"
       >
         <span class="hidden group-data-[sidebar-size=sm]:block">
-          <img :src="logoSm" alt="" class="h-8 mx-auto" />
+          <img :src="logoSmLight" alt="" class="h-8 mx-auto" />
         </span>
         <span class="group-data-[sidebar-size=sm]:hidden">
-          <img :src="logoDark" alt="" class="h-24 mx-auto" />
+          <img :src="logoSmLight" alt="" class="h-24 mx-auto" />
         </span>
       </div>
       <div
@@ -328,10 +328,10 @@ function handleDropdownMenu() {
         class="hidden group-data-[sidebar=dark]:block group-data-[sidebar=brand]:block group-data-[sidebar=modern]:block cursor-pointer"
       >
         <span class="hidden group-data-[sidebar-size=sm]:block">
-          <img :src="logoSm" alt="" class="mx-auto" />
+          <img :src="logoSmDark" alt="" class="mx-auto" />
         </span>
         <span class="group-data-[sidebar-size=sm]:hidden">
-          <img :src="logoLight" alt="" class="h-24 mx-auto" />
+          <img :src="logoSmLight" alt="" class="h-24 mx-auto" />
         </span>
       </div>
       <button type="button" class="hidden p-0 float-end" id="vertical-hover">

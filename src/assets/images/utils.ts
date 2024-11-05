@@ -10,9 +10,10 @@ import emailDashboard from "@/assets/images/email-dashboard.png";
 import faq from "@/assets/images/faq.png";
 import hrDashboard from "@/assets/images/hr-dashboard.png";
 import invoiceSignature from "@/assets/images/invoice-signature.svg";
-import logoDark from "@/assets/images/logo.png";
-import logoLight from "@/assets/images/logo.png";
-import logoSm from "@/assets/images/logo-sm.png";
+import logoDark from "@/assets/images/dark-logo.png";
+import logoLight from "@/assets/images/light-logo.png";
+import logoSmLight from "@/assets/images/logo-sm-light.png";
+import logoSmDark from "@/assets/images/logo-sm-dark.png"
 import medal from "@/assets/images/medal.png";
 import newDocument from "@/assets/images/new-document.png";
 import radioArrow from "@/assets/images/radio-arrow.svg";
@@ -34,7 +35,8 @@ export {
   invoiceSignature,
   logoDark,
   logoLight,
-  logoSm,
+  logoSmLight,
+  logoSmDark,
   medal,
   newDocument,
   radioArrow,

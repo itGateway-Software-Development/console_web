@@ -6,7 +6,7 @@ import {
   Search,
   LayoutGrid,
 } from "lucide-vue-next";
-import { logoDark, logoLight, logoSm } from "@/assets/images/utils";
+import { logoDark, logoLight, logoSmDark, logoSmLight } from "@/assets/images/utils";
 import Language from "@/app/layout/navbar/Language.vue";
 import SiteMode from "@/app/layout/navbar/SiteMode.vue";
 import Cart from "@/app/layout/navbar/Cart.vue";
@@ -123,7 +123,7 @@ const onOverlayClick = () => {
           >
             <router-link to="/">
               <span class="hidden">
-                <img :src="logoSm" alt="" class="w-full h-full mx-auto" />
+                <img :src="logoSmDark" alt="" class="w-full h-full mx-auto" />
               </span>
               <span
                 class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
@@ -138,7 +138,7 @@ const onOverlayClick = () => {
               <span
                 class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
               >
-                <img :src="logoSm" alt="" class="w-full h-full mx-auto" />
+                <img :src="logoLight" alt="" class="w-full h-full mx-auto" />
               </span>
               <span
                 class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block"
