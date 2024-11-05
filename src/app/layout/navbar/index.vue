@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
-import { ChevronsLeft, ChevronsRight, Search } from "lucide-vue-next";
+import {
+  ChevronsLeft,
+  ChevronsRight,
+  Search,
+  LayoutGrid,
+} from "lucide-vue-next";
 import { logoDark, logoLight, logoSm } from "@/assets/images/utils";
 import Language from "@/app/layout/navbar/Language.vue";
 import SiteMode from "@/app/layout/navbar/SiteMode.vue";
@@ -8,6 +13,7 @@ import Cart from "@/app/layout/navbar/Cart.vue";
 import Notification from "@/app/layout/navbar/Notification.vue";
 import Settings from "@/app/layout/navbar/Settings.vue";
 import Profile from "@/app/layout/navbar/Profile.vue";
+import Services from "@/app/layout/navbar/Services.vue";
 import CartDrawer from "@/app/layout/navbar/CartDrawer.vue";
 import CustomizerDrawer from "@/app/layout/navbar/customizer/Drawer.vue";
 import { useLayoutStore } from "@/store/layout";
@@ -117,12 +123,12 @@ const onOverlayClick = () => {
           >
             <router-link to="/">
               <span class="hidden">
-                <img :src="logoSm" alt="" class="h-6 mx-auto" />
+                <img :src="logoSm" alt="" class="w-full h-full mx-auto" />
               </span>
               <span
                 class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
               >
-                <img :src="logoDark" alt="" class="h-6 mx-auto" />
+                <img :src="logoDark" alt="" class="w-full h-full mx-auto" />
               </span>
             </router-link>
             <router-link
@@ -132,16 +138,15 @@ const onOverlayClick = () => {
               <span
                 class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
               >
-                <img :src="logoSm" alt="" class="h-6 mx-auto" />
+                <img :src="logoSm" alt="" class="w-full h-full mx-auto" />
               </span>
               <span
                 class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block"
               >
-                <img :src="logoLight" alt="" class="h-6 mx-auto" />
+                <img :src="logoLight" alt="" class="w-full h-full mx-auto" />
               </span>
             </router-link>
           </div>
-
           <button
             type="button"
             class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-75 ease-linear bg-topbar rounded-md btn hover:bg-slate-100 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark first-letter: group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:border-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:md:hidden hamburger-icon"
@@ -154,7 +159,11 @@ const onOverlayClick = () => {
             />
             <ChevronsRight v-else class="size-5" />
           </button>
-
+          <div
+            class="flex items-center gap-1 cursor-pointer"
+          >
+            <Services />
+          </div>
           <div
             class="relative hidden rtl:mr-3 lg:block group-data-[layout=horizontal]:hidden group-data-[layout=horizontal]:lg:block ltr:ml-3"
           >
@@ -175,11 +184,7 @@ const onOverlayClick = () => {
               <Language />
             </div>
             <SiteMode />
-            <!-- <Cart @toggleDrawer="toggleCartDrawer" />
-            <Notification />
-            <div class="relative items-center hidden h-header md:flex">
-              <Settings @toggleDrawer="toggleCustomizerDrawer" />
-            </div> -->
+           
             <Profile />
           </div>
         </div>

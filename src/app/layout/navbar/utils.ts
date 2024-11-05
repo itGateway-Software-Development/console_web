@@ -23,14 +23,6 @@ export const languagesData: {
   { title: "English", value: "English", src: usFlag, lang: "en" },
   { title: "Myanmar", value: "English", src: usFlag, lang: "en" },
   { title: "Thailand", value: "English", src: usFlag, lang: "en" },
-  // { title: "Spanish", value: "Spanish", src: esFlag, lang: "sp" },
-  // { title: "German", value: "German", src: deFlag, lang: "gr" },
-  // { title: "French", value: "French", src: frFlag, lang: "fr" },
-  // { title: "Japanese", value: "Japanese", src: jpFlag, lang: "jp" },
-  // { title: "Chinese", value: "Chinese", src: chinaFlag, lang: "ch" },
-  // { title: "Italian", value: "Italian", src: itFlag, lang: "it" },
-  // { title: "Russian", value: "Russian", src: ruFlag, lang: "ru" },
-  // { title: "Arabic", value: "Arabic", src: aeFlag, lang: "ar" }
 ];
 
 export const cartItems: CartItemType[] = [

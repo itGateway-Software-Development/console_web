@@ -18,7 +18,7 @@ export const useLayoutStore = defineStore("layout-store", {
     layoutType: LAYOUTS.VERTICAL,
     layoutWidth: LAYOUT_WIDTH.FLUID,
     topBarColor: TOP_BAR.DARK,
-    sideBarSize: SIDEBAR_SIZE.DEFAULT,
+    sideBarSize: SIDEBAR_SIZE.SMALL,
     sideBarColor: SIDEBAR_COLOR.DARK,
     dir: DIR.LTR,
     skinLayout: SKIN_LAYOUT.DEFAULT,
