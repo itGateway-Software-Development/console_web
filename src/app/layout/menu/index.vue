@@ -317,7 +317,7 @@ function handleDropdownMenu() {
         class="group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden group-data-[sidebar=modern]:hidden cursor-pointer"
       >
         <span class="hidden group-data-[sidebar-size=sm]:block">
-          <img :src="logoSmLight" alt="" class="h-8 mx-auto" />
+          <img :src="logoSmLight" alt="" class="mx-auto" />
         </span>
         <span class="group-data-[sidebar-size=sm]:hidden">
           <img :src="logoSmLight" alt="" class="h-24 mx-auto" />
@@ -331,7 +331,7 @@ function handleDropdownMenu() {
           <img :src="logoSmDark" alt="" class="mx-auto" />
         </span>
         <span class="group-data-[sidebar-size=sm]:hidden">
-          <img :src="logoSmLight" alt="" class="h-24 mx-auto" />
+          <img :src="logoSmDark" alt="" class="h-24 mx-auto" />
         </span>
       </div>
       <button type="button" class="hidden p-0 float-end" id="vertical-hover">
