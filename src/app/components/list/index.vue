@@ -84,7 +84,7 @@ const getListItemClass = computed(() => {
   <Popper :placement="placement">
     <slot name="title" />
     <template #content="{ close }">
-      <div class="bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md">
+      <div class="bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md -mt-2">
         <ul
           ref="list"
           class="transition-[height] duration-200 bg-white z-50 py-2 dropdown-menu min-w-[10rem] ltr:text-left rtl:text-right rounded-md dropdown-menu flex flex-col"

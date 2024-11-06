@@ -113,73 +113,75 @@ const onOverlayClick = () => {
     <!-- group-data-[layout=horizontal]:z-[1004] -->
     <div class="layout-width">
       <div
-        class="flex items-center px-4 mx-auto bg-topbar border-b-2 border-topbar group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand shadow-md h-header shadow-slate-200/50 group-data-[navbar=bordered]:rounded-md group-data-[navbar=bordered]:group-[.is-sticky]/topbar:rounded-t-none group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-700 dark:shadow-none group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-zink-500 group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-md group-data-[navbar=bordered]:shadow-none group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-none group-data-[layout=horizontal]:shadow-none group-data-[layout=horizontal]:dark:group-[.is-sticky]/topbar:shadow-none"
+        class="flex items-center px-4 mx-auto bg-topbar border-b-2 border-topbar group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand shadow-md h-[50px] shadow-slate-200/50 group-data-[navbar=bordered]:rounded-md group-data-[navbar=bordered]:group-[.is-sticky]/topbar:rounded-t-none group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-700 dark:shadow-none group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-zink-500 group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-md group-data-[navbar=bordered]:shadow-none group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-none group-data-[layout=horizontal]:shadow-none group-data-[layout=horizontal]:dark:group-[.is-sticky]/topbar:shadow-none"
       >
         <div
-          class="flex items-center w-full group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl navbar-header group-data-[layout=horizontal]:ltr:xl:pr-3 group-data-[layout=horizontal]:rtl:xl:pl-3"
+          class="flex justify-between items-center w-full group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl navbar-header group-data-[layout=horizontal]:ltr:xl:pr-3 group-data-[layout=horizontal]:rtl:xl:pl-3"
         >
-          <div
-            class="items-center justify-center hidden px-5 text-center h-header group-data-[layout=horizontal]:md:flex group-data-[layout=horizontal]:ltr::pl-0 group-data-[layout=horizontal]:rtl:pr-0"
-          >
-            <router-link to="/">
-              <span class="hidden">
-                <img :src="logoSmDark" alt="" class="w-full h-full mx-auto" />
-              </span>
-              <span
-                class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
-              >
-                <img :src="logoDark" alt="" class="w-full h-full mx-auto" />
-              </span>
-            </router-link>
-            <router-link
-              to="/"
-              class="hidden group-data-[topbar=dark]:block group-data-[topbar=brand]:block"
+          <div class="flex items-center">
+            <div
+              class="items-center justify-center hidden px-5 text-center h-header group-data-[layout=horizontal]:md:flex group-data-[layout=horizontal]:ltr::pl-0 group-data-[layout=horizontal]:rtl:pr-0"
             >
-              <span
-                class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
+              <router-link to="/">
+                <span class="hidden">
+                  <img :src="logoSmDark" alt="" class="w-full h-full mx-auto" />
+                </span>
+                <span
+                  class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
+                >
+                  <img :src="logoDark" alt="" class="w-full h-full mx-auto" />
+                </span>
+              </router-link>
+              <router-link
+                to="/"
+                class="hidden group-data-[topbar=dark]:block group-data-[topbar=brand]:block"
               >
-                <img :src="logoLight" alt="" class="w-full h-full mx-auto" />
-              </span>
-              <span
-                class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block"
-              >
-                <img :src="logoLight" alt="" class="w-full h-full mx-auto" />
-              </span>
-            </router-link>
-          </div>
-          <button
-            type="button"
-            class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-75 ease-linear bg-topbar rounded-md btn hover:bg-slate-100 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark first-letter: group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:border-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:md:hidden hamburger-icon"
-            id="topnav-hamburger-icon"
-            @click="toggleLeftSideBar"
-          >
-            <ChevronsLeft
-              v-if="sideBarSize === SIDEBAR_SIZE.DEFAULT"
-              class="size-5"
-            />
-            <ChevronsRight v-else class="size-5" />
-          </button>
-          <div
-            class="flex items-center gap-1 cursor-pointer"
-          >
-            <Services />
+                <span
+                  class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden"
+                >
+                  <img :src="logoLight" alt="" class="w-full h-full mx-auto" />
+                </span>
+                <span
+                  class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block"
+                >
+                  <img :src="logoLight" alt="" class="w-full h-full mx-auto" />
+                </span>
+              </router-link>
+            </div>
+            <button
+              type="button"
+              class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-75 ease-linear bg-topbar rounded-md btn hover:bg-slate-100 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark first-letter: group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:border-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:md:hidden hamburger-icon"
+              id="topnav-hamburger-icon"
+              @click="toggleLeftSideBar"
+            >
+              <ChevronsLeft
+                v-if="sideBarSize === SIDEBAR_SIZE.DEFAULT"
+                class="size-5"
+              />
+              <ChevronsRight v-else class="size-5" />
+            </button>
+            <div
+              class="flex items-center gap-1 cursor-pointer"
+            >
+              <Services />
+            </div>
           </div>
           <div
             class="relative hidden rtl:mr-3 lg:block group-data-[layout=horizontal]:hidden group-data-[layout=horizontal]:lg:block ltr:ml-3"
           >
             <input
               type="text"
-              class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
+              class="py-1 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[500px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
               placeholder="Search for ..."
               autocomplete="off"
             />
 
             <Search
-              class="inline-block size-4 absolute left-2.5 top-2.5 text-topbar-item fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:fill-zink-600"
+              class="inline-block size-4 absolute left-2.5 top-2 text-topbar-item fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:fill-zink-600"
             />
           </div>
 
-          <div class="flex gap-3 ms-auto">
+          <div class="flex gap-3">
             <div class="relative flex items-center dropdown h-header">
               <Language />
             </div>

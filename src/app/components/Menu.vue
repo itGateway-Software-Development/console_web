@@ -27,7 +27,7 @@ defineProps({
   <Popper :placement="placement">
     <slot />
     <template #content="{ close }">
-      <div class="bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md">
+      <div class="bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md -mt-2 -ms-5">
         <slot name="content" :close="close" />
       </div>
     </template>
