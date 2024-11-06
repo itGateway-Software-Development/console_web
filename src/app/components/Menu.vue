@@ -20,14 +20,18 @@ defineProps({
       | "left-end"
     >,
     default: "bottom-end"
-  }
+  },
+  extraTranslate: {
+      type: Boolean,
+      default: false,
+    },
 });
 </script>
 <template>
   <Popper :placement="placement">
     <slot />
     <template #content="{ close }">
-      <div class="bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md -mt-2 -ms-5">
+      <div :class="`bg-white dark:bg-zink-600 dropdown-menu shadow-md rounded-md -mt-2 -ms-5 ${extraTranslate ? 'translate-x-5' : ''}`">
         <slot name="content" :close="close" />
       </div>
     </template>

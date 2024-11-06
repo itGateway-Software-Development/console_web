@@ -18,6 +18,8 @@ import CartDrawer from "@/app/layout/navbar/CartDrawer.vue";
 import CustomizerDrawer from "@/app/layout/navbar/customizer/Drawer.vue";
 import { useLayoutStore } from "@/store/layout";
 import { SIDEBAR_SIZE } from "@/app/const";
+import Region from "./Region.vue";
+import Setting from "./Setting.vue";
 
 const cardDrawer = ref(false);
 const cartCount = ref(0);
@@ -113,7 +115,7 @@ const onOverlayClick = () => {
     <!-- group-data-[layout=horizontal]:z-[1004] -->
     <div class="layout-width">
       <div
-        class="flex items-center px-4 mx-auto bg-topbar border-b-2 border-topbar group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand shadow-md h-[50px] shadow-slate-200/50 group-data-[navbar=bordered]:rounded-md group-data-[navbar=bordered]:group-[.is-sticky]/topbar:rounded-t-none group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-700 dark:shadow-none group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-zink-500 group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-md group-data-[navbar=bordered]:shadow-none group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-none group-data-[layout=horizontal]:shadow-none group-data-[layout=horizontal]:dark:group-[.is-sticky]/topbar:shadow-none"
+        class="flex items-center px-4 mx-auto bg-topbar border-b-2 border-topbar group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand shadow-md h-[50px] overflow-hidden shadow-slate-200/50 group-data-[navbar=bordered]:rounded-md group-data-[navbar=bordered]:group-[.is-sticky]/topbar:rounded-t-none group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-700 dark:shadow-none group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-zink-500 group-data-[topbar=dark]:group-[.is-sticky]/topbar:dark:shadow-md group-data-[navbar=bordered]:shadow-none group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-none group-data-[layout=horizontal]:shadow-none group-data-[layout=horizontal]:dark:group-[.is-sticky]/topbar:shadow-none"
       >
         <div
           class="flex justify-between items-center w-full group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl navbar-header group-data-[layout=horizontal]:ltr:xl:pr-3 group-data-[layout=horizontal]:rtl:xl:pl-3"
@@ -182,12 +184,27 @@ const onOverlayClick = () => {
           </div>
 
           <div class="flex gap-3">
-            <div class="relative flex items-center dropdown h-header">
+            <!-- <div class="relative flex items-center dropdown h-header">
               <Language />
             </div>
-            <SiteMode />
-           
-            <Profile />
+            <div>
+              <SiteMode />
+            </div> -->
+            <!-- <div>
+              <Notification />
+            </div>
+            <div class="w-[1px] bg-slate-400 h-5 my-auto"></div> -->
+            <div>
+              <Setting />
+            </div>
+            <div class="w-[1px] bg-slate-400 h-5 my-auto"></div>
+            <div>
+              <Region />
+            </div>
+            <div class="w-[1px] bg-slate-400 h-5 my-auto"></div>
+            <div>
+              <Profile />
+            </div>
           </div>
         </div>
       </div>
