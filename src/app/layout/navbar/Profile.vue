@@ -1,16 +1,28 @@
 <script lang="ts" setup>
-import { userProfile } from "@/assets/images/users/utils";
-import { User2, Mail, MessagesSquare, Gem, LogOut } from "lucide-vue-next";
+import { User2, MessagesSquare, Gem, LogOut } from "lucide-vue-next";
 import { authService } from "@/app/service/httpService/httpServiceProvider.ts";
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 const onSignOut = () => {
   authService.removeUser();
 };
 
 const authUser = ref();
+const isMenuOpen = ref(false);
+const menuRef = ref<HTMLElement | null>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+  if (menuRef.value && !menuRef.value.contains(e.target as Node)) {
+    isMenuOpen.value = false;
+  }
+}
 
 onMounted(() => {
   authUser.value = authService.getUser();
+  document.addEventListener("click", handleClickOutside);
+})
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
 })
 </script>
 <template>
@@ -21,8 +33,9 @@ onMounted(() => {
         class="inline-block p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200"
         id="dropdownMenuButton"
         data-bs-toggle="dropdown"
+        @click="isMenuOpen = !isMenuOpen"
       >
-        <div class="hover:text-default-500 flex items-center">
+        <div ref="menuRef" :class="`hover:text-default-500 flex items-center font-medium ${isMenuOpen ? 'text-default-500' : 'text-zink-200'}`">
           {{ authUser ? authUser.name : '' }}
           <i class="ri-arrow-down-s-fill text-2xl"></i>
         </div>
@@ -35,11 +48,11 @@ onMounted(() => {
         </h6>
         <a href="#!" class="flex gap-3 mb-3">
           <div class="relative inline-block shrink-0">
-            <div class="rounded bg-slate-100 dark:bg-zink-500">
-              <img :src="`https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${authUser ? authUser.name : ''}`" alt="" class="size-12 rounded" />
+            <div class="rounded">
+              <img :src="`https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${authUser ? authUser.name : ''}`" alt="" class="size-12 rounded-full" />
             </div>
             <span
-              class="-top-1 ltr:-right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"
+              class="-top-0 ltr:right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"
             ></span>
           </div>
           <div>

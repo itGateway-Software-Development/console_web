@@ -1,33 +1,60 @@
 <script lang="ts" setup>
 import NavBtn from "@/app/layout/navbar/Button.vue";
 import { BellRing, Clock, MoveRight, Heart } from "lucide-vue-next";
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { notificationData } from "@/app/layout/navbar/utils.ts";
 import { computed } from "vue";
 
 const tab = ref("viewAll");
+const isMenuOpen = ref(false);
+const menuRef = ref<HTMLElement | null>(null);
+
+const handleClickOutside = (e: MouseEvent) => {
+  if (menuRef.value && !menuRef.value.contains(e.target as Node)) {
+    isMenuOpen.value = false;
+  }
+}
 const getParsedData = computed(() => {
   if (tab.value === "viewAll") {
     return notificationData;
   }
   return notificationData.filter((item) => item.type === tab.value);
 });
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+})
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
+})
+
+
 </script>
 <template>
-  <TMenu>
-    <NavBtn class="dropdown">
-      <BellRing
-        class="inline-block size-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"
-      />
-      <span class="absolute top-0 right-0 flex w-1.5 h-1.5">
-        <span
-          class="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-sky-400"
+  <TMenu  :extraTranslate="true">
+    <div class="relative flex items-center dropdown h-header">
+      <button
+        type="button"
+        class="relative inline-block p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        @click="isMenuOpen = !isMenuOpen"
+      >
+        <BellRing
+          ref="menuRef"
+          :class="`inline-block size-5 stroke-2 cursor-pointer ${isMenuOpen ? 'text-default-500' : 'text-zink-200'} hover:text-default-500 hover:bg-none`"
         />
-        <span
-          class="relative inline-flex w-1.5 h-1.5 rounded-full bg-sky-500"
-        />
-      </span>
-    </NavBtn>
+        <span class="absolute -top-2 -right-0.5 flex w-1.5 h-1.5">
+          <span
+            class="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-sky-400"
+          />
+          <span
+            class="relative inline-flex w-1.5 h-1.5 rounded-full bg-sky-500"
+          />
+        </span>
+      </button>
+    </div>
     <template #content>
       <div class="min-w-[20rem] lg:min-w-[26rem]">
         <div class="p-4">
@@ -37,9 +64,9 @@ const getParsedData = computed(() => {
               class="inline-flex items-center justify-center size-5 ml-1 text-[11px] font-medium border rounded-full text-white bg-orange-500 border-orange-500"
             >
               15
-            </span>
+            </span >
           </h6>
-          <TTabs
+          <!-- <TTabs
             v-model="tab"
             class="flex flex-wrap w-full p-1 mb-2 text-sm font-medium text-center rounded-md filter-btns text-slate-500 bg-slate-100 nav-tabs dark:bg-zink-500 dark:text-zink-200"
           >
@@ -71,7 +98,7 @@ const getParsedData = computed(() => {
             >
               Invites
             </TTab>
-          </TTabs>
+          </TTabs> -->
         </div>
         <simplebar class="max-h-[350px]">
           <div class="flex flex-col gap-1">

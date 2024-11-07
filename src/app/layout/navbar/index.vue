@@ -4,14 +4,9 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Search,
-  LayoutGrid,
 } from "lucide-vue-next";
-import { logoDark, logoLight, logoSmDark, logoSmLight } from "@/assets/images/utils";
-import Language from "@/app/layout/navbar/Language.vue";
-import SiteMode from "@/app/layout/navbar/SiteMode.vue";
-import Cart from "@/app/layout/navbar/Cart.vue";
+import { logoDark, logoLight, logoSmDark } from "@/assets/images/utils";
 import Notification from "@/app/layout/navbar/Notification.vue";
-import Settings from "@/app/layout/navbar/Settings.vue";
 import Profile from "@/app/layout/navbar/Profile.vue";
 import Services from "@/app/layout/navbar/Services.vue";
 import CartDrawer from "@/app/layout/navbar/CartDrawer.vue";
@@ -20,6 +15,7 @@ import { useLayoutStore } from "@/store/layout";
 import { SIDEBAR_SIZE } from "@/app/const";
 import Region from "./Region.vue";
 import Setting from "./Setting.vue";
+import Support from "./Support.vue";
 
 const cardDrawer = ref(false);
 const cartCount = ref(0);
@@ -173,7 +169,7 @@ const onOverlayClick = () => {
           >
             <input
               type="text"
-              class="py-1 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[500px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
+              class="py-1 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[350px] xl:min-w-[500px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
               placeholder="Search for ..."
               autocomplete="off"
             />
@@ -184,16 +180,14 @@ const onOverlayClick = () => {
           </div>
 
           <div class="flex gap-3">
-            <!-- <div class="relative flex items-center dropdown h-header">
-              <Language />
-            </div>
             <div>
-              <SiteMode />
-            </div> -->
-            <!-- <div>
+              <Support />
+            </div>
+            <div class="w-[1px] bg-slate-400 h-5 my-auto"></div>
+            <div>
               <Notification />
             </div>
-            <div class="w-[1px] bg-slate-400 h-5 my-auto"></div> -->
+            <div class="w-[1px] bg-slate-400 h-5 my-auto"></div>
             <div>
               <Setting />
             </div>
@@ -210,7 +204,7 @@ const onOverlayClick = () => {
       </div>
     </div>
   </header>
-  <TDrawer v-model="cardDrawer" width="md:w-96">
+  <!-- <TDrawer v-model="cardDrawer" width="md:w-96">
     <template #title>
       <div class="grow">
         <h5 class="mb-0 text-16 font-medium">
@@ -241,5 +235,5 @@ const onOverlayClick = () => {
     <template #content>
       <CustomizerDrawer v-if="customizerDrawer" />
     </template>
-  </TDrawer>
+  </TDrawer> -->
 </template>

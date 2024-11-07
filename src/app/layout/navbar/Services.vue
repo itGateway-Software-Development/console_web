@@ -1,15 +1,31 @@
 <script lang="ts" setup>
-import { LayoutGrid, Star,Cpu, Package, Database, MonitorSmartphone } from "lucide-vue-next";
+import { LayoutGrid, Star } from "lucide-vue-next";
 import {cloudServices} from "./services"
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
 const currentValue = ref<String>("Most Demand")
 const service = ref(cloudServices.find(service => service.title == currentValue.value));
+const isMenuOpen = ref(false);
+const menuRef = ref<HTMLElement | null>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+  if (menuRef.value && !menuRef.value.contains(e.target as Node)) {
+    isMenuOpen.value = false;
+  }
+}
 
 const onSelectService = (title:String) => {
   currentValue.value = title;
   service.value = cloudServices.find(service => service.title == title);
 }
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+})
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
+})
 
 </script>
 <template>
@@ -17,12 +33,15 @@ const onSelectService = (title:String) => {
     <div class="relative flex items-center dropdown h-header">
       <button
         type="button"
-        class="inline-flex gap-1 p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-default-500 group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-default-500 group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-default-500 group-data-[topbar=dark]:dark:text-zink-200 hover:text-default-500"
+        class="inline-block p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-default-500 group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-default-500 group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-default-500 group-data-[topbar=dark]:dark:text-zink-200 hover:text-default-500"
         id="dropdownMenuButton"
         data-bs-toggle="dropdown"
+        @click="isMenuOpen = !isMenuOpen"
       >
-        <LayoutGrid class="size-5" /> 
-        <span>Services</span>
+        <div ref="menuRef" :class="`hover:text-default-500 flex gap-1 items-center font-medium ${isMenuOpen ? 'text-default-500' : 'text-zink-200'}`">
+          <LayoutGrid class="size-5" /> 
+          <span>Services</span>
+        </div>
       </button>
 
     </div>
@@ -30,7 +49,7 @@ const onSelectService = (title:String) => {
       <div class="lg:w-[800px] min-h-[700px] p-4 pt-10">
         <div class="grid grid-cols-3">
           <div class="col-span-1">
-            <div class="flex items-center gap-2 border-b border-zink-200 text-default-500 pb-3 me-5" @click="onSelectService('Most Demand')">
+            <div :class="`flex items-center gap-2 border-b border-zink-200 pb-3 me-5 ${currentValue == 'Most Demand' ? 'text-default-500' : ''}`" @click="onSelectService('Most Demand')">
               <Star />
               <span>Most Demand</span>
             </div>

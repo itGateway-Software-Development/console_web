@@ -3,14 +3,15 @@ import { authService } from "@/app/service/httpService/httpServiceProvider.ts";
 import { onMounted, onUnmounted, ref } from "vue";
 
 const authUser = ref();
+
 const isMenuOpen = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
 
-  const handleClickOutside = (e: MouseEvent) => {
+const handleClickOutside = (e: MouseEvent) => {
   if (menuRef.value && !menuRef.value.contains(e.target as Node)) {
     isMenuOpen.value = false;
   }
-}
+};
 
 onMounted(() => {
   authUser.value = authService.getUser();
@@ -22,7 +23,7 @@ onUnmounted(() => {
 })
 </script>
 <template>
-  <TMenu>
+  <TMenu :extraTranslate="true">
     <div class="relative flex items-center dropdown h-header">
       <button
         type="button"
@@ -31,9 +32,8 @@ onUnmounted(() => {
         data-bs-toggle="dropdown"
         @click="isMenuOpen = !isMenuOpen"
       >
-        <div ref="menuRef" :class="`hover:text-default-500 flex items-center font-medium ${isMenuOpen ? 'text-default-500' : 'text-zink-200'}`">
-          Singapore
-          <i class="ri-arrow-down-s-fill text-2xl"></i>
+        <div class=" flex items-center">
+          <i ref="menuRef" :class="`ri-question-line text-[22px] ${isMenuOpen ? 'text-default-500' : 'text-zink-200'} hover:text-default-500`"></i>
         </div>
       </button>
     </div>
@@ -44,30 +44,10 @@ onUnmounted(() => {
             <router-link to="/#"
               class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
             >
-              Myanmar
+              Support Center
             </router-link>
           </li>
-          <li>
-            <router-link to="/#"
-              class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
-            >
-              Singapore
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/#"
-              class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
-            >
-              Thailand
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/#"
-              class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
-            >
-            Netherland
-            </router-link>
-          </li>
+          
         </ul>
       </div>
     </template>
