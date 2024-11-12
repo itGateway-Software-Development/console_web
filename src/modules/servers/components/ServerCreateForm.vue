@@ -10,6 +10,10 @@
     import { ref } from 'vue';
 import axios from 'axios'
 import api from '@/app/service/api/url'
+import Loading from '@/modules/shared/Loading.vue'
+import { toastError, toastSuccess } from '@/plugins/sweetAlert'
+import { X } from "lucide-vue-next";
+
 
     const locations = ref( [
         {
@@ -216,14 +220,66 @@ import api from '@/app/service/api/url'
         })
     }
 
+    const isDeploying = ref(false)
+    const finishedDeploy = ref(false)
+    const data:any = ref()
     const deploy = async() => {
+        isDeploying.value = true;
         const response = await axios.get(api.deploy);
         console.log(response);
+        if(response.data.status == 'success') {
+            isDeploying.value = false
+            toastSuccess('Successfully Deployed');
+            data.value = response.data
+            finishedDeploy.value = true
+        } else {
+            isDeploying.value = false;
+            toastError('Something Wrong !');
+        }
     }
 
 </script>
 <template>
     <section class="mt-5">
+        <Loading v-if="isDeploying" />
+        <TModal v-model="finishedDeploy">
+            <template #content>
+                <div
+                    class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500"
+                >
+                    <h5 class="text-16" id="exampleModalLabel">
+                        Server Detail
+                    </h5>
+                    <TButton
+                    icon
+                    variant="plain-soft"
+                    class="p-0"
+                    color="slate"
+                    @click="finishedDeploy = false"
+                    >
+                    <X />
+                    </TButton>
+                </div>
+                <div class="p-5">
+                    <div class="gap-3 grid grid-cols-2 mb-3">
+                        <div class="col-span-1">
+                            <h6>IP</h6>
+                        </div>
+                        <div class="col-span-1">
+                            <h6>: &nbsp; {{data.ip}}</h6>
+                        </div>
+                    </div>
+                    <div class="gap-3 grid grid-cols-2">
+                        <div class="col-span-1">
+                            <h6>Server OS</h6>
+                        </div>
+                        <div class="col-span-1">
+                            <h6>: &nbsp; {{data.server}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </TModal>
         <div class="grid grid-cols-1 sm:grid-cols-7 gap-3 relative">
             <div class="col-span-1 md:col-span-5">
                 <div class="card p-0 m-0 mb-8">

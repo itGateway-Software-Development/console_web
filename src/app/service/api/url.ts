@@ -13,6 +13,8 @@ let api = {
             }
         }
     },
+
+    // Auth api 
     login: url + 'login?api_token='+ api_token,
     register: url + 'register?api_token='+ api_token,
     verify_email: url + 'verify-email?api_token=' + api_token,
