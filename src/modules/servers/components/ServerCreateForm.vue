@@ -263,10 +263,18 @@ import { X } from "lucide-vue-next";
                 <div class="p-5">
                     <div class="gap-3 grid grid-cols-2 mb-3">
                         <div class="col-span-1">
+                            <h6>Status</h6>
+                        </div>
+                        <div class="col-span-1">
+                            <h6>: &nbsp; {{data.server_status}}</h6>
+                        </div>
+                    </div>
+                    <div class="gap-3 grid grid-cols-2 mb-3">
+                        <div class="col-span-1">
                             <h6>IP</h6>
                         </div>
                         <div class="col-span-1">
-                            <h6>: &nbsp; {{data.ip}}</h6>
+                            <h6>: &nbsp; {{data.ip_address}}</h6>
                         </div>
                     </div>
                     <div class="gap-3 grid grid-cols-2">
@@ -274,7 +282,7 @@ import { X } from "lucide-vue-next";
                             <h6>Server OS</h6>
                         </div>
                         <div class="col-span-1">
-                            <h6>: &nbsp; {{data.server}}</h6>
+                            <h6>: &nbsp; {{data.server_type}}</h6>
                         </div>
                     </div>
                 </div>
