@@ -13,6 +13,7 @@ import api from '@/app/service/api/url'
 import Loading from '@/modules/shared/Loading.vue'
 import { toastError, toastSuccess } from '@/plugins/sweetAlert'
 import { X } from "lucide-vue-next";
+import { useRouter } from 'vue-router'
 
 
     const locations = ref( [
@@ -220,9 +221,9 @@ import { X } from "lucide-vue-next";
         })
     }
 
+    const router = useRouter();
     const isDeploying = ref(false)
     const finishedDeploy = ref(false)
-    const data:any = ref()
     const deploy = async() => {
         isDeploying.value = true;
         const response = await axios.get(api.deploy);
@@ -230,7 +231,7 @@ import { X } from "lucide-vue-next";
         if(response.data.status == 'success') {
             isDeploying.value = false
             toastSuccess('Successfully Deployed');
-            data.value = response.data
+            router.push("/servers")
             finishedDeploy.value = true
         } else {
             isDeploying.value = false;
@@ -242,7 +243,7 @@ import { X } from "lucide-vue-next";
 <template>
     <section class="mt-5">
         <Loading v-if="isDeploying" />
-        <TModal v-model="finishedDeploy">
+        <!-- <TModal v-model="finishedDeploy">
             <template #content>
                 <div
                     class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500"
@@ -287,7 +288,7 @@ import { X } from "lucide-vue-next";
                     </div>
                 </div>
             </template>
-        </TModal>
+        </TModal> -->
         <div class="grid grid-cols-1 sm:grid-cols-7 gap-3 relative">
             <div class="col-span-1 md:col-span-5">
                 <div class="card p-0 m-0 mb-8">
