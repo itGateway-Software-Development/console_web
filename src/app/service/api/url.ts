@@ -26,6 +26,7 @@ let api = {
     is_still_authenticated: url + 'check-auth?api_token=' + api_token,
     deploy: url+ "run-script",
     get_deploy_servers: url+ "deploy-servers",
+    delete_deploy_servers: url+ "delete-deploy-server",
 
     // location api
     locations: url + 'locations?api_token=' + api_token,

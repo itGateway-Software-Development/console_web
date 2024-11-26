@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import { locationService, authService } from "@/app/service/httpService/httpServiceProvider";
 import { askConfirmation, toastError, toastSuccess } from "@/plugins/sweetAlert";
 import Loading from "@/modules/shared/Loading.vue";
+import axios from "axios";
+import api from "@/app/service/api/url";
 // import { LocationPayload } from "../types/LocationType";
 
 const formData = ref<any>(null);
@@ -214,11 +216,17 @@ const onDeleteMultipleRecords = () => {
   });
 
   if (checkedIds.length) {
+    console.log(checkedIds);
     askConfirmation().then(async(result) => {
       if(result.isConfirmed) {
         pageLoad.value = true
         try {
-          const res = await locationService.deleteMulti(authUser.token, {ids: checkedIds});
+          // const res = await locationService.deleteMulti(authUser.token, {ids: checkedIds});
+          const res = await axios.get(api.delete_deploy_servers, {
+            params: {
+              ids: checkedIds
+            }
+          });
           if(res.data.status == 'success') {
             pageLoad.value = false
             toastSuccess(res.data.message)

@@ -75,7 +75,7 @@ onMounted( () => {
       </template> 
 
       <template #server_status="{ value }">
-        <TLabel :color="value.server_status == 'running' ? 'green' : 'red'">
+        <TLabel :color="value.server_status == 'Running' ? 'green' : 'red'">
           {{ value.server_status }}
         </TLabel>
       </template>
