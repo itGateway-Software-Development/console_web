@@ -226,7 +226,8 @@ import { useRouter } from 'vue-router'
     const finishedDeploy = ref(false)
     const deploy = async() => {
         isDeploying.value = true;
-        const response = await axios.get(api.deploy);
+        let os = selectedServerDetail.value.operationSystems.name
+        const response = await axios.get(api.deploy+'/'+os);
         console.log(response);
         if(response.data.status == 'success') {
             isDeploying.value = false
@@ -376,7 +377,7 @@ import { useRouter } from 'vue-router'
             </div>
             <div class="col-span-1 md:col-span-2">
                 <div class="sticky top-[90px]">
-                    <div class="card">
+                    <div class="card"> {{}}
                         <h5 class="px-5 py-3 mb-3 text-center border-b">Summary</h5>
                         <div class="px-5 py-3 grid grid-cols-3 items-center gap-2">
                             <div class="col-span-1">
