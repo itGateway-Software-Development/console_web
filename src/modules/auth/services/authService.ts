@@ -24,7 +24,7 @@ export default class AuthService {
           } catch (error: any) {
             console.log(error);
             if(error.status == 422) {
-                throw new Error('Invalid credential!')
+                throw new Error(error.response?.data?.errors?.email[0] ?? "Invalid credential!")
             } else {
                 throw new Error(error.response?.data?.message || "Registration failed");
             }

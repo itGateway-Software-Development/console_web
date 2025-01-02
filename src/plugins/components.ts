@@ -10,16 +10,12 @@ import TAvatar from "@/app/components/avatar/Default.vue";
 import TAlert from "@/app/components/Alert.vue";
 import TAvatarGroup from "@/app/components/avatar/Group.vue";
 import TAvatarGroupWithTooltip from "@/app/components/avatar/GroupWithTooltip.vue";
-import TButton from "@/app/components/Button.vue";
 import TLabel from "@/app/components/Label.vue";
 import TCollapse from "@/app/components/Collapse.vue";
 import TCountTo from "@/app/components/CountTo.vue";
 import TNotification from "@/app/components/Notification.vue";
 import TModal from "@/app/components/Modal.vue";
 import TProgressBar from "@/app/components/ProgressBar.vue";
-import TBasicTable from "@/app/components/tables/Basic.vue";
-import TDataTable from "@/app/components/tables/DataTable.vue";
-import TListJsTable from "@/app/components/tables/ListJs.vue";
 import TInputField from "@/app/components/formFields/InputField.vue";
 import TFlatPicker from "@/app/components/datePicker/FlatPicker.vue";
 import TPagination from "@/app/components/Pagination.vue";
@@ -38,8 +34,9 @@ import NumberInputSpinner from "@/app/components/NumberInputSpinner.vue";
 import TCkEditor from "@/app/components/editors/CKEditor.vue";
 import TBallon from "@/app/components/editors/Ballon.vue";
 import TInline from "@/app/components/editors/Inline.vue";
-import Button from "@/modules/shared/Button.vue";
-import DefaultButton from "@/modules/shared/DefaultButton.vue";
+import Button from "@/app/components/Button.vue";
+import TButton from "@/app/components/AppButton.vue"
+import DefaultButton from "@/app/components/DefaultButton.vue";
 
 export const initGlobalComponents = (app: App) => {
   app.component("TList", TList);
@@ -52,16 +49,12 @@ export const initGlobalComponents = (app: App) => {
   app.component("TAvatar", TAvatar);
   app.component("TAvatarGroup", TAvatarGroup);
   app.component("TAvatarGroupWithTooltip", TAvatarGroupWithTooltip);
-  app.component("TButton", TButton);
   app.component("TLabel", TLabel);
   app.component("TCollapse", TCollapse);
   app.component("TCountTo", TCountTo);
   app.component("TNotification", TNotification);
   app.component("TModal", TModal);
   app.component("TProgressBar", TProgressBar);
-  app.component("TBasicTable", TBasicTable);
-  app.component("TDataTable", TDataTable);
-  app.component("TListJsTable", TListJsTable);
   app.component("TInputField", TInputField);
   app.component("TFlatPicker", TFlatPicker);
   app.component("TPagination", TPagination);
@@ -81,5 +74,6 @@ export const initGlobalComponents = (app: App) => {
   app.component("TBallon", TBallon);
   app.component("TInline", TInline);
   app.component("Button", Button);
+  app.component("TButton", TButton);
   app.component("DefaultButton", DefaultButton);
 };

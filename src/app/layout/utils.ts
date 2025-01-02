@@ -31,24 +31,23 @@ export const menuItems: MenuItemType[] = [
     path: '/'
   },
 
-  { isHeader: true, title: "admin" },
-  {
-    title: "server_managements",
-    icon: ServerCog,
-    subMenu: [
-      { path: "/server-management/location", title: "location" },
-      { path: "/server-management/server-types", title: "server-types" },
-      { path: "/server-management/operation-systems", title: "operation-system" },
-      // { path: "/server-management/servers", title: "servers" },
-    ]
-  },
+  // { isHeader: true, title: "admin" },
+  // {
+  //   title: "server_managements",
+  //   icon: ServerCog,
+  //   subMenu: [
+  //     { path: "/server-management/location", title: "location" },
+  //     { path: "/server-management/server-types", title: "server-types" },
+  //     { path: "/server-management/operation-systems", title: "operation-system" },
+  //   ]
+  // },
 
-  { isHeader: true, title: "products" },
-  {
-    icon: Server,
-    title: "servers",
-    path: '/servers'
-  },
+  // { isHeader: true, title: "products" },
+  // {
+  //   icon: Server,
+  //   title: "servers",
+  //   path: '/servers'
+  // },
 
  
   // {

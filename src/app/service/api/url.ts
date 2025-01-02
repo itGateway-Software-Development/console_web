@@ -27,36 +27,6 @@ let api = {
     deploy: url+ "run-script",
     get_deploy_servers: url+ "deploy-servers",
     delete_deploy_servers: url+ "delete-deploy-server",
-
-    // location api
-    locations: url + 'locations?api_token=' + api_token,
-    update_location(id:String|number) {
-        return url + 'location/' + id + '?api_token=' + api_token
-    }, 
-    delete_location(id: String|number) {
-        return url + 'locations/' + id + '?api_token=' + api_token
-    },
-    delete_multi_location: url + 'del/multi-locations?api_token=' + api_token,
-
-    // server types api
-    server_types: url + 'server-types?api_token=' + api_token,
-    update_server_types(id:String|number) {
-        return url + 'server-type/' + id + '?api_token=' + api_token
-    }, 
-    delete_server_types(id: String|number) {
-        return url + 'server-types/' + id + '?api_token=' + api_token
-    },
-    delete_multi_server_types: url + 'del/multi-server-types?api_token=' + api_token,
-
-    // operation system api
-    operation_systems: url + 'operation-systems?api_token=' + api_token,
-    update_operation_systems(id:String|number) {
-        return url + 'operation-system/' + id + '?api_token=' + api_token
-    }, 
-    delete_operation_systems(id: String|number) {
-        return url + 'operation-systems/' + id + '?api_token=' + api_token
-    },
-    delete_multi_operation_systems: url + 'del/multi-operation-systems?api_token=' + api_token
 };
 
 export default api;
