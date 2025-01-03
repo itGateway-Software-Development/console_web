@@ -2,7 +2,7 @@ import DefaultLayout from "@/layouts/Default.vue";
 
 export const evmRoutes = [
     {
-      path: "/services/compute",
+      path: "/services/compute/elastic-virtual-machine/",
       name: "Compute",
       meta: {
         title: "Compute",
@@ -11,8 +11,13 @@ export const evmRoutes = [
       },
       children: [
         {
-          path: "elastic-virtual-machine",
-          component: () =>import("@/modules/compute/elasticVirtualMachine/views/EVM.vue"),
+            path: "",
+            name: "EVM Dashboard",
+            component: () =>import("@/modules/compute/elasticVirtualMachine/views/Dashboard.vue"),
+        },
+        {
+            path: "vm",
+            component: () =>import("@/modules/compute/elasticVirtualMachine/views/VM.vue"),
         },
       ],
     },

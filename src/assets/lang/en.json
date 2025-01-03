@@ -168,5 +168,7 @@
   "t-server_managements": "Server Management",
   "t-location": "Location",
   "t-server-types": "Server Types",
-  "t-operation-system": "Operating System"
+  "t-operation-system": "Operating System",
+  "t-evm": "EVM",
+  "t-dvm": "DVM"
 }

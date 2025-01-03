@@ -1,7 +1,12 @@
 <script lang="ts" setup>
 import { computed, ref, onMounted, watch, onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { logoDark, logoLight, logoSmDark, logoSmLight } from "@/assets/images/utils";
+import {
+  logoDark,
+  logoLight,
+  logoSmDark,
+  logoSmLight,
+} from "@/assets/images/utils";
 import { menuItems } from "@/app/layout/utils";
 import SubMenu from "@/app/layout/menu/SubMenu.vue";
 import { useLayoutStore } from "@/store/layout";
@@ -18,6 +23,21 @@ const route = useRoute();
 const router = useRouter();
 const path = computed(() => route.path);
 
+// set initial menu to '/'
+let filteredMenu = ref(menuItems.filter((item) => item.pathGroup == "overview"));
+
+// change menu when route change
+watch(
+  () => route.path,
+  (newPath, oldPath) => {
+    if(newPath == '/') {
+      filteredMenu.value = menuItems.filter((item) => item.pathGroup == "overview");
+    } else {
+      filteredMenu.value = menuItems.filter((item) => newPath.startsWith(item.pathGroup!)); 
+    }
+  }
+);
+
 const sideBarComponent = computed(() => {
   const sideBarSize = layoutStore.value.sideBarSize;
 
@@ -30,32 +50,35 @@ const sideBarComponent = computed(() => {
 const onLogoClick = () => {
   router.push("/");
 };
-const mappedData: any = menuItems.map((item) => {
-  if (item.subMenu) {
-    const nestedSubMenu = item.subMenu.map((subMenu: SubMenuType) => {
-      if (subMenu.subMenu) {
+
+const mappedData: any = computed(() => {
+  return filteredMenu.value.map((item) => {
+    if (item.subMenu) {
+      const nestedSubMenu = item.subMenu.map((subMenu: SubMenuType) => {
+        if (subMenu.subMenu) {
+          return {
+            ...subMenu,
+            isActive: false,
+            id: uuidv4(),
+          };
+        }
         return {
           ...subMenu,
-          isActive: false,
-          id: uuidv4()
         };
-      }
-      return {
-        ...subMenu
-      };
-    });
+      });
 
+      return {
+        ...item,
+        subMenu: nestedSubMenu,
+        isActive: false,
+        id: uuidv4(),
+      };
+    }
     return {
       ...item,
-      subMenu: nestedSubMenu,
-      isActive: false,
-      id: uuidv4()
+      id: uuidv4(),
     };
-  }
-  return {
-    ...item,
-    id: uuidv4()
-  };
+  });
 });
 
 const clientWidth = ref(document.documentElement.clientWidth);
@@ -155,7 +178,7 @@ const setupHorizontalMenu = () => {
         click: (e: any) => {
           e.preventDefault();
           isMoreMenu = !isMoreMenu;
-        }
+        },
       };
 
       let updatedMenuItems: any = [...visibleItems];
@@ -177,7 +200,7 @@ const toggleActivation = (menuItemId: string) => {
     if (item.id === menuItemId) {
       return {
         ...item,
-        isActive: !item.isActive
+        isActive: !item.isActive,
       };
     } else if (item.subMenu) {
       const nestedSubmenu = getActivations(menuItemId, item);
@@ -186,7 +209,7 @@ const toggleActivation = (menuItemId: string) => {
         isActive: nestedSubmenu.some(
           (subMenu: SubMenuType) => subMenu.isActive
         ),
-        subMenu: nestedSubmenu
+        subMenu: nestedSubmenu,
       };
       return firstLevelMenu;
     }
@@ -199,7 +222,7 @@ const getActivations: any = (menuItemId: string, menuItem: MenuItemType) => {
     if (menuItemId && subMenu.id === menuItemId) {
       return {
         ...subMenu,
-        isActive: !subMenu.isActive
+        isActive: !subMenu.isActive,
       };
     } else {
       if (subMenu.subMenu) {
@@ -208,7 +231,7 @@ const getActivations: any = (menuItemId: string, menuItem: MenuItemType) => {
         const temp = {
           ...subMenu,
           subMenu: nestedSubmenu,
-          isActive: nestedSubmenu.some((item: SubMenuType) => item.isActive)
+          isActive: nestedSubmenu.some((item: SubMenuType) => item.isActive),
         };
         return temp;
       }
@@ -225,13 +248,13 @@ const hideActivation = () => {
       const nestedSubmenu = item.subMenu.map((subMenu) => {
         return {
           ...subMenu,
-          isActive: false
+          isActive: false,
         };
       });
       return {
         ...item,
         isActive: false,
-        subMenu: nestedSubmenu
+        subMenu: nestedSubmenu,
       };
     }
     return { ...item, isActive: false };
@@ -348,7 +371,7 @@ function handleDropdownMenu() {
           class="group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:flex-col group-data-[layout=horizontal]:md:flex-row"
           id="navbar-nav"
         >
-          <template v-for="menuItem in menuItemData" :key="menuItem.title">
+          <template v-for="(menuItem,index) in menuItemData" :key="`${index}${menuItem.title}`">
             <li
               v-if="menuItem.isHeader"
               class="px-4 py-1 text-vertical-menu-item group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern uppercase font-medium text-[11px] cursor-default tracking-wider group-data-[sidebar-size=sm]:hidden group-data-[layout=horizontal]:hidden inline-block group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:underline group-data-[sidebar-size=md]:text-center group-data-[sidebar=dark]:dark:text-zink-200 mt-3"
@@ -370,7 +393,7 @@ function handleDropdownMenu() {
               <router-link
                 class="relative flex items-center ltr:pl-3 rtl:pr-3 ltr:pr-5 rtl:pl-5 mx-3 my-1 group/menu-link text-vertical-menu-item-font-size font-normal transition-all duration-75 ease-linear rounded-md py-2.5 text-vertical-menu-item hover:text-vertical-menu-item-hover hover:bg-vertical-menu-item-bg-hover [&.active]:text-vertical-menu-item-active [&.active]:bg-vertical-menu-item-bg-active group-data-[sidebar=dark]:text-vertical-menu-item-dark group-data-[sidebar=dark]:hover:text-vertical-menu-item-hover-dark group-data-[sidebar=dark]:dark:hover:text-custom-500 group-data-[layout=horizontal]:dark:hover:text-custom-500 group-data-[sidebar=dark]:hover:bg-vertical-menu-item-bg-hover-dark group-data-[sidebar=dark]:dark:hover:bg-zink-600 group-data-[sidebar=dark]:[&.active]:text-vertical-menu-item-active-dark group-data-[sidebar=dark]:[&.active]:bg-vertical-menu-item-bg-active-dark group-data-[sidebar=brand]:text-vertical-menu-item-brand group-data-[sidebar=brand]:hover:text-vertical-menu-item-hover-brand group-data-[sidebar=brand]:hover:bg-vertical-menu-item-bg-hover-brand group-data-[sidebar=brand]:[&.active]:bg-vertical-menu-item-bg-active-brand group-data-[sidebar=brand]:[&.active]:text-vertical-menu-item-active-brand group-data-[sidebar=modern]:text-vertical-menu-item-modern group-data-[sidebar=modern]:hover:bg-vertical-menu-item-bg-hover-modern group-data-[sidebar=modern]:hover:text-vertical-menu-item-hover-modern group-data-[sidebar=modern]:[&.active]:bg-vertical-menu-item-bg-active-modern group-data-[sidebar=modern]:[&.active]:text-vertical-menu-item-active-modern group-data-[sidebar-size=md]:block group-data-[sidebar-size=md]:text-center group-data-[sidebar-size=sm]:group-hover/sm:w-[calc(theme('spacing.vertical-menu-sm')_*_3.63)] group-data-[sidebar-size=sm]:group-hover/sm:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:group-hover/sm:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:group-hover/sm:bg-vertical-menu-border-modern group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:group-hover/sm:bg-vertical-menu-brand group-data-[sidebar-size=sm]:my-0 group-data-[layout=horizontal]:m-0 group-data-[layout=horizontal]:ltr:pr-8 group-data-[layout=horizontal]:rtl:pl-8 group-data-[layout=horizontal]:hover:bg-transparent group-data-[layout=horizontal]:[&.active]:bg-transparent [&.dropdown-button]:before:absolute [&.dropdown-button]:[&.show]:before:content-['\ea4e'] [&.dropdown-button]:before:content-['\ea6e'] [&.dropdown-button]:before:font-remix ltr:[&.dropdown-button]:before:right-2 rtl:[&.dropdown-button]:before:left-2 [&.dropdown-button]:before:text-16 group-data-[sidebar-size=sm]:[&.dropdown-button]:before:hidden group-data-[sidebar-size=md]:[&.dropdown-button]:before:hidden group-data-[sidebar=dark]:dark:text-zink-200 group-data-[layout=horizontal]:dark:text-zink-200 group-data-[sidebar=dark]:[&.active]:dark:bg-zink-600 group-data-[layout=horizontal]:dark:[&.active]:text-custom-500 rtl:[&.dropdown-button]:before:rotate-180 group-data-[layout=horizontal]:[&.dropdown-button]:before:rotate-90 group-data-[layout=horizontal]:[&.dropdown-button]:[&.show]:before:rotate-0 rtl:[&.dropdown-button]:[&.show]:before:rotate-0"
                 :class="{
-                  active: path === menuItem.path
+                  active: path === menuItem.path,
                 }"
                 :to="menuItem.path"
                 @click="toggleActivation"

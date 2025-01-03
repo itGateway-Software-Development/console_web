@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    console.log('evm');
+    console.log('vm');
 </script>
 
 <template>
-    <div> EVM </div>
+    <div> vm </div>
 </template>

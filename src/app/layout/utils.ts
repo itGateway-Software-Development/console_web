@@ -20,19 +20,37 @@ import {
   Trophy,
   Map,
   Server,
-  ServerCog
+  ServerCog,
+  LayoutDashboard,
+  MonitorCheck
 } from "lucide-vue-next";
 import { MenuItemType } from "@/app/layout/types";
 
 export const menuItems: MenuItemType[] = [
-  { isHeader: true, title: "overview" },
+  { isHeader: true, title: "overview", pathGroup: 'overview' },
   {
     icon: MonitorDot,
     title: "dashboards",
-    path: '/'
+    path: '/',
+    pathGroup: 'overview',
   },
 
-  // { isHeader: true, title: "admin" },
+  { isHeader: true, title: "evm", pathGroup: '/services/compute/elastic-virtual-machine' },
+
+  {
+    icon: LayoutDashboard,
+    title: "dashboards",
+    path: '/services/compute/elastic-virtual-machine',
+    pathGroup: '/services/compute/elastic-virtual-machine'
+  },
+  {
+    icon: MonitorCheck,
+    title: "evm",
+    path: '/services/compute/elastic-virtual-machine/vm',
+    pathGroup: '/services/compute/elastic-virtual-machine'
+  },
+
+  
   // {
   //   title: "server_managements",
   //   icon: ServerCog,
