@@ -25,6 +25,7 @@ import {
 import { MenuItemType } from "@/app/layout/types";
 
 export const menuItems: MenuItemType[] = [
+  { isHeader: true, title: "overview" },
   {
     icon: MonitorDot,
     title: "dashboards",

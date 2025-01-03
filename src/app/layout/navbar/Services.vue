@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { LayoutGrid, Star } from "lucide-vue-next";
-import {cloudServices} from "./services"
+import { useServiceCategoryStore } from "@/store/useServiceCategoryStore";
 import { onMounted, onUnmounted, ref } from "vue";
+import { RouterLink } from "vue-router";
 
 const currentValue = ref<String>("Most Demand")
-const service = ref(cloudServices.find(service => service.title == currentValue.value));
+const {serviceCategory} = useServiceCategoryStore();
+const service = ref(serviceCategory.find(service => service.title == currentValue.value));
 const isMenuOpen = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
 
@@ -16,7 +18,7 @@ const menuRef = ref<HTMLElement | null>(null);
 
 const onSelectService = (title:String) => {
   currentValue.value = title;
-  service.value = cloudServices.find(service => service.title == title);
+  service.value = serviceCategory.find(service => service.title == title);
 }
 
 onMounted(() => {
@@ -54,7 +56,7 @@ onUnmounted(() => {
               <span>Most Demand</span>
             </div>
             <div class="mt-5">
-              <div class="mb-3" v-for="(service, index) in cloudServices" :key="index">
+              <div class="mb-3" v-for="(service, index) in serviceCategory" :key="index">
                 <div :class="`flex items-center gap-2 ${currentValue == service.title ? 'text-default-500' : ''}`" v-if="service.title != 'Most Demand'" @click="onSelectService(service.title)">
                   <img class="w-6 h-6" :src="service?.image" alt="">
                   <p>{{service?.title}}</p>
@@ -69,8 +71,10 @@ onUnmounted(() => {
             </div>
             <div class="flex flex-col gap-5 py-5 ps-[68px] pe-10">
               <div v-for="(service, index) in service?.availableServices" :key="index" class="hover:text-default-500" >
-                <p class="text-16 font-bold ">{{service.title}}</p>
-                <p class="text-slate-400 text-sm">{{service.subTitle}}</p>
+                <RouterLink :to="`${service.link}`">
+                  <p class="text-16 font-bold ">{{service.title}}</p>
+                  <p class="text-slate-400 text-sm">{{service.subTitle}}</p>
+                </RouterLink>
               </div>
             </div>
           </div>
